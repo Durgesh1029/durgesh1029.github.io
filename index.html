@@ -1,0 +1,1953 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Durgesh Dongre — Electrical Engineering Portfolio & Interactive Logbook</title>
+    <meta name="description" content="Interactive 3D Logbook Portfolio of Durgesh Dongre — M.Tech student in Electrical Engineering at IIT Kanpur.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+/* ===================================================================
+   DURGESH DONGRE — Electrical Engineering & Hardware Portfolio
+   Luminous Vibrant Colorful Design System (No Dark/Black Backgrounds)
+   =================================================================== */
+
+/* ---- CSS Custom Properties ---- */
+:root {
+  /* Luminous Multi-Hue Gradient Background (No Black!) */
+  --bg-gradient-main: linear-gradient(135deg, #e0f2fe 0%, #f3e8ff 25%, #fce7f3 50%, #e0e7ff 75%, #ccfbf1 100%);
+  --bg-panel-glass: rgba(255, 255, 255, 0.88);
+  --bg-card-glass: rgba(255, 255, 255, 0.82);
+  --bg-card-hover: rgba(255, 255, 255, 0.96);
+
+  /* Vibrant Colorful Accents */
+  --neon-cyan: #0284c7;
+  --neon-blue: #2563eb;
+  --neon-purple: #7c3aed;
+  --neon-magenta: #db2777;
+  --neon-pink: #e11d48;
+  --neon-emerald: #059669;
+  --neon-teal: #0d9488;
+  --neon-gold: #d97706;
+
+  /* Gradients */
+  --grad-cyan-purple: linear-gradient(135deg, #0284c7, #7c3aed);
+  --grad-purple-pink: linear-gradient(135deg, #7c3aed, #db2777);
+  --grad-gold-orange: linear-gradient(135deg, #d97706, #ea580c);
+  --grad-emerald-teal: linear-gradient(135deg, #059669, #0284c7);
+  --grad-vibrant-3: linear-gradient(135deg, #0284c7 0%, #7c3aed 50%, #db2777 100%);
+
+  /* Soft Vibrant Shadows */
+  --glow-cyan: 0 8px 30px rgba(2, 132, 199, 0.25);
+  --glow-purple: 0 8px 30px rgba(124, 58, 237, 0.25);
+  --glow-magenta: 0 8px 30px rgba(219, 39, 119, 0.25);
+
+  /* Rich Luminous Typography Colors (No Black!) */
+  --text-primary: #0f172a;
+  --text-secondary: #334155;
+  --text-muted: #64748b;
+  --text-bright: #020617;
+
+  --border-glass: rgba(124, 58, 237, 0.15);
+  --border-cyan: rgba(2, 132, 199, 0.4);
+  --border-purple: rgba(124, 58, 237, 0.4);
+  --border-magenta: rgba(219, 39, 119, 0.4);
+
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-body: 'Plus Jakarta Sans', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --section-padding: 90px 6% 120px 6%;
+  --card-radius: 16px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg-gradient-main);
+  background-attachment: fixed;
+  color: var(--text-primary);
+  overflow-x: hidden;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+body.book-mode { overflow-x: hidden; }
+
+/* ---- Ambient Colorful Glow Orbs ---- */
+.ambient-glow {
+  position: fixed; border-radius: 50%; filter: blur(130px); pointer-events: none; z-index: 0; opacity: 0.55;
+  animation: floatOrb 18s ease-in-out infinite alternate;
+}
+.glow-1 { width: 550px; height: 550px; background: radial-gradient(circle, #38bdf8, transparent); top: -100px; left: -100px; }
+.glow-2 { width: 600px; height: 600px; background: radial-gradient(circle, #c084fc, transparent); top: 35%; right: -150px; animation-delay: -5s; }
+.glow-3 { width: 550px; height: 550px; background: radial-gradient(circle, #f472b6, transparent); bottom: 20%; left: -150px; animation-delay: -10s; }
+.glow-4 { width: 500px; height: 500px; background: radial-gradient(circle, #fbbf24, transparent); bottom: -100px; right: -100px; animation-delay: -15s; }
+
+@keyframes floatOrb {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(50px, 35px) scale(1.08); }
+  100% { transform: translate(-30px, 60px) scale(0.96); }
+}
+
+a { color: inherit; text-decoration: none; }
+::selection { background: #7c3aed; color: #ffffff; }
+
+#particles-canvas {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none;
+}
+
+/* ===================================================================
+   NAVIGATION BAR
+   =================================================================== */
+.nav-bar {
+  position: fixed; top: 0; left: 0; width: 100%;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 16px 5%; z-index: 1000;
+  background: rgba(255, 255, 255, 0.88); backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(124, 58, 237, 0.15);
+  box-shadow: 0 4px 25px rgba(124, 58, 237, 0.08); transition: all 0.3s ease;
+}
+
+.nav-logo { font-family: var(--font-display); font-size: 1.25rem; font-weight: 700; letter-spacing: 1.5px; }
+.logo-bracket { color: var(--neon-cyan); }
+.logo-text { background: var(--grad-vibrant-3); -webkit-background-clip: text; color: transparent; font-weight: 800; }
+
+.nav-links { display: flex; gap: 20px; }
+.nav-link { font-family: var(--font-mono); font-size: 0.82rem; font-weight: 600; color: var(--text-secondary); letter-spacing: 1.5px; padding: 4px 8px; transition: all 0.3s ease; }
+.nav-link:hover, .nav-link.active { color: var(--neon-purple); text-shadow: 0 0 10px rgba(124, 58, 237, 0.3); }
+
+.nav-hamburger { display: none; background: none; border: none; cursor: pointer; flex-direction: column; gap: 5px; padding: 5px; }
+.nav-hamburger span { width: 24px; height: 2px; background: var(--neon-purple); }
+
+.mobile-menu { display: none; position: fixed; top: 60px; left: 0; width: 100%; background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(20px); padding: 20px 5%; flex-direction: column; gap: 16px; z-index: 999; border-bottom: 1px solid var(--border-purple); }
+.mobile-menu.open { display: flex; }
+.mobile-link { font-family: var(--font-mono); font-size: 1.1rem; color: var(--text-primary); padding: 8px 0; }
+
+/* ===================================================================
+   3D BOOK VIEWPORT & PAGE TURN SYSTEM
+   =================================================================== */
+.book-viewport {
+  perspective: 2200px; width: 100%; min-height: calc(100vh - 75px); position: relative; overflow-x: hidden; padding-top: 75px;
+  display: flex; justify-content: center; align-items: center;
+}
+
+.book-container { width: 100%; max-width: 1300px; margin: 0 auto; position: relative; transform-style: preserve-3d; display: flex; justify-content: center; align-items: center; }
+
+.book-page {
+  width: 100%; min-height: calc(100vh - 100px); display: none; opacity: 0;
+  transform-origin: center center; transition: transform 0.6s cubic-bezier(0.645, 0.045, 0.355, 1), opacity 0.5s ease;
+  position: relative; margin: 0 auto;
+}
+
+.book-page.active-page {
+  display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; opacity: 1; transform: rotateY(0deg); z-index: 10;
+  animation: pageFadeIn 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.page-content-wrapper {
+  width: 100%; max-width: 1200px; margin: 0 auto;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: 30px 4% 100px 4%; text-align: center;
+}
+
+.text-center { text-align: center; margin: 0 auto; display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; }
+
+@keyframes pageFadeIn {
+  0% { opacity: 0; transform: scale(0.98) rotateY(-8deg); }
+  100% { opacity: 1; transform: scale(1) rotateY(0deg); }
+}
+
+.book-page.page-turn-out-left { display: block; animation: turnPageOutLeft 0.6s cubic-bezier(0.645, 0.045, 0.355, 1) forwards; }
+@keyframes turnPageOutLeft { 0% { transform: rotateY(0deg); opacity: 1; } 100% { transform: rotateY(-100deg) scale(0.92); opacity: 0; } }
+
+.book-page.page-turn-in-right { display: block; animation: turnPageInRight 0.6s cubic-bezier(0.645, 0.045, 0.355, 1) forwards; }
+@keyframes turnPageInRight { 0% { transform: rotateY(90deg) scale(0.95); opacity: 0; } 100% { transform: rotateY(0deg) scale(1); opacity: 1; } }
+
+.book-page.page-turn-out-right { display: block; animation: turnPageOutRight 0.6s cubic-bezier(0.645, 0.045, 0.355, 1) forwards; }
+@keyframes turnPageOutRight { 0% { transform: rotateY(0deg); opacity: 1; } 100% { transform: rotateY(100deg) scale(0.92); opacity: 0; } }
+
+.book-page.page-turn-in-left { display: block; animation: turnPageInLeft 0.6s cubic-bezier(0.645, 0.045, 0.355, 1) forwards; }
+@keyframes turnPageInLeft { 0% { transform: rotateY(-90deg) scale(0.95); opacity: 0; } 100% { transform: rotateY(0deg) scale(1); opacity: 1; } }
+
+/* Page Corner Fold Effect */
+.page-corner-fold {
+  position: absolute; top: 0; right: 0; width: 0; height: 0;
+  border-style: solid; border-width: 0 45px 45px 0;
+  border-color: transparent rgba(124, 58, 237, 0.25) transparent transparent;
+  filter: drop-shadow(-3px 3px 5px rgba(0,0,0,0.15));
+  pointer-events: none; z-index: 5;
+}
+
+/* ===================================================================
+   FLOATING BOOK NAVIGATION CONTROLS BAR (FIXED BOTTOM)
+   =================================================================== */
+.book-controls {
+  position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+  display: flex; align-items: center; gap: 20px; padding: 10px 24px;
+  background: rgba(255, 255, 255, 0.92); backdrop-filter: blur(20px);
+  border: 1px solid var(--border-purple); border-radius: 40px;
+  box-shadow: 0 10px 35px rgba(124, 58, 237, 0.18), var(--glow-purple);
+  z-index: 1000;
+}
+
+.page-nav-btn {
+  font-family: var(--font-mono); font-size: 0.82rem; font-weight: 700; letter-spacing: 1.5px;
+  padding: 8px 18px; border-radius: 20px; background: var(--grad-vibrant-3);
+  color: #ffffff; border: none; cursor: pointer; transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(124, 58, 237, 0.3);
+}
+
+.page-nav-btn:hover { transform: scale(1.06); box-shadow: 0 6px 20px rgba(124, 58, 237, 0.5); }
+
+.page-indicator { display: flex; align-items: center; gap: 10px; font-family: var(--font-mono); font-size: 0.85rem; }
+.page-label { color: var(--text-muted); font-size: 0.75rem; letter-spacing: 1px; }
+.page-number { color: var(--neon-purple); font-weight: bold; font-size: 1rem; }
+.page-title-tag { color: var(--neon-cyan); font-weight: 600; padding: 2px 8px; background: rgba(2, 132, 199, 0.1); border-radius: 4px; border: 1px solid var(--border-cyan); }
+
+/* ===================================================================
+   HERO SECTION
+   =================================================================== */
+.hero-section {
+  min-height: calc(100vh - 75px); display: flex; align-items: center; justify-content: center;
+  text-align: center; position: relative;
+}
+.hero-content { max-width: 900px; position: relative; z-index: 2; }
+
+.hero-badge-pill {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--font-mono); font-size: 0.8rem; font-weight: 600;
+  padding: 6px 16px; border-radius: 20px;
+  background: rgba(2, 132, 199, 0.08); border: 1px solid var(--border-cyan);
+  color: var(--neon-cyan); margin-bottom: 20px;
+}
+.pulse-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--neon-cyan); box-shadow: 0 0 10px var(--neon-cyan); animation: pulseDot 1.5s infinite alternate; }
+@keyframes pulseDot { 0% { transform: scale(0.8); opacity: 0.6; } 100% { transform: scale(1.2); opacity: 1; } }
+
+.hero-name {
+  font-family: var(--font-display);
+  font-size: clamp(2.8rem, 6.5vw, 4.8rem);
+  font-weight: 800; letter-spacing: 2px; line-height: 1.1;
+  background: var(--grad-vibrant-3); -webkit-background-clip: text; color: transparent;
+  filter: drop-shadow(0 4px 20px rgba(124, 58, 237, 0.2));
+  margin-bottom: 16px;
+}
+
+.hero-subtitle { font-family: var(--font-mono); color: var(--neon-purple); font-size: 1.05rem; font-weight: 600; letter-spacing: 3px; margin-bottom: 30px; }
+
+.hero-title-bar { display: flex; justify-content: center; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 40px; }
+.hero-tag { font-family: var(--font-mono); font-size: 0.85rem; font-weight: 600; letter-spacing: 1.5px; padding: 6px 14px; border-radius: 18px; }
+.tag-cyan { background: rgba(2, 132, 199, 0.1); border: 1px solid var(--border-cyan); color: var(--neon-cyan); }
+.tag-purple { background: rgba(124, 58, 237, 0.1); border: 1px solid var(--border-purple); color: var(--neon-purple); }
+.tag-magenta { background: rgba(219, 39, 119, 0.1); border: 1px solid var(--border-magenta); color: var(--neon-magenta); }
+.tag-emerald { background: rgba(5, 150, 105, 0.1); border: 1px solid rgba(5, 150, 105, 0.4); color: var(--neon-emerald); }
+.hero-divider { color: rgba(100, 116, 139, 0.4); font-size: 0.8rem; }
+
+.hero-stats { display: flex; justify-content: center; gap: 32px; margin-bottom: 40px; }
+.stat-block { display: flex; flex-direction: column; align-items: center; padding: 18px 28px; background: rgba(255, 255, 255, 0.85); border-radius: var(--card-radius); backdrop-filter: blur(12px); border: 1px solid var(--border-glass); box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05); }
+.block-cyan { border-color: var(--border-cyan); box-shadow: var(--glow-cyan); }
+.block-purple { border-color: var(--border-purple); box-shadow: var(--glow-purple); }
+.block-pink { border-color: var(--border-magenta); box-shadow: var(--glow-magenta); }
+.stat-number { font-family: var(--font-display); font-size: 2.2rem; font-weight: 800; color: var(--text-bright); }
+.stat-label { font-family: var(--font-mono); font-size: 0.75rem; font-weight: 600; color: var(--text-secondary); letter-spacing: 1.5px; margin-top: 4px; }
+
+.hero-cta { display: flex; gap: 20px; justify-content: center; }
+.cta-btn { font-family: var(--font-mono); font-size: 0.88rem; font-weight: 700; letter-spacing: 1.5px; padding: 14px 30px; border-radius: 30px; cursor: pointer; transition: all 0.3s ease; display: inline-flex; align-items: center; justify-content: center; border: none; }
+.btn-vibrant { background: var(--grad-vibrant-3); color: #ffffff; box-shadow: 0 4px 20px rgba(124, 58, 237, 0.35); }
+.btn-vibrant:hover { transform: translateY(-3px); box-shadow: 0 8px 30px rgba(124, 58, 237, 0.5); }
+.btn-glass { background: rgba(255, 255, 255, 0.8); color: var(--text-primary); border: 1px solid var(--border-glass); backdrop-filter: blur(10px); }
+.btn-glass:hover { background: rgba(255, 255, 255, 0.95); border-color: var(--neon-cyan); transform: translateY(-3px); }
+
+/* ===================================================================
+   ABOUT & SECTIONS
+   =================================================================== */
+.section-header { margin-bottom: 40px; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; }
+.section-tag { font-family: var(--font-mono); color: var(--neon-cyan); font-size: 0.85rem; font-weight: 600; letter-spacing: 2px; }
+.section-title { font-family: var(--font-display); font-size: 2.2rem; font-weight: 700; letter-spacing: 1.5px; margin: 6px 0 14px 0; }
+.title-gradient-1 { background: linear-gradient(135deg, #0284c7, #7c3aed); -webkit-background-clip: text; color: transparent; }
+.title-gradient-2 { background: linear-gradient(135deg, #7c3aed, #db2777); -webkit-background-clip: text; color: transparent; }
+.title-gradient-3 { background: linear-gradient(135deg, #0284c7, #059669, #d97706); -webkit-background-clip: text; color: transparent; }
+
+.section-line { height: 3px; width: 80px; border-radius: 2px; }
+.line-gradient-1 { background: var(--grad-cyan-purple); }
+.line-gradient-2 { background: var(--grad-purple-pink); }
+.line-gradient-3 { background: var(--grad-emerald-teal); }
+.section-subtitle { color: var(--text-secondary); font-size: 1.05rem; margin-top: 10px; }
+
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+.about-terminal { background: rgba(248, 250, 252, 0.95); border-radius: var(--card-radius); border: 1px solid var(--border-purple); box-shadow: var(--glow-purple); overflow: hidden; }
+.terminal-header { background: rgba(241, 245, 249, 0.95); padding: 10px 16px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid rgba(124, 58, 237, 0.15); }
+.terminal-dot { width: 10px; height: 10px; border-radius: 50%; }
+.terminal-dot.red { background: #ff5f56; } .terminal-dot.yellow { background: #ffbd2e; } .terminal-dot.green { background: #27c93f; }
+.terminal-title { font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-muted); margin-left: 8px; }
+
+.terminal-body { padding: 20px; font-family: var(--font-mono); font-size: 0.9rem; line-height: 1.8; color: var(--text-primary); }
+.cmd-prompt { color: var(--neon-magenta); font-weight: bold; }
+.cmd-key { color: var(--neon-purple); font-weight: 600; }
+
+.about-cards { display: flex; flex-direction: column; gap: 20px; }
+.info-card { padding: 24px; border-radius: var(--card-radius); background: var(--bg-card-glass); backdrop-filter: blur(14px); border: 1px solid var(--border-glass); transition: all 0.3s ease; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04); }
+.colorful-card-1 { border-left: 4px solid var(--neon-cyan); }
+.colorful-card-2 { border-left: 4px solid var(--neon-purple); }
+.info-card:hover { transform: translateY(-4px); box-shadow: 0 8px 30px rgba(124, 58, 237, 0.15); }
+
+.info-card h3 { font-family: var(--font-display); font-size: 1.2rem; margin-bottom: 16px; color: var(--text-bright); }
+.edu-item { display: flex; flex-direction: column; margin-bottom: 14px; }
+.edu-year { font-family: var(--font-mono); font-size: 0.8rem; font-weight: 600; color: var(--neon-cyan); }
+.edu-degree { font-size: 1rem; font-weight: 600; color: var(--text-primary); }
+.edu-badge { font-family: var(--font-mono); font-size: 0.8rem; font-weight: 600; color: var(--neon-gold); }
+.interest-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+
+/* SKILLS */
+.skills-pillars { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 28px; }
+.skill-pillar { background: var(--bg-card-glass); border-radius: var(--card-radius); backdrop-filter: blur(16px); border: 1px solid var(--border-glass); overflow: hidden; transition: all 0.3s ease; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04); }
+.pillar-cyan { border-top: 4px solid var(--neon-cyan); }
+.pillar-gold { border-top: 4px solid var(--neon-gold); }
+.pillar-magenta { border-top: 4px solid var(--neon-magenta); }
+.skill-pillar:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(124, 58, 237, 0.18); }
+
+.pillar-header { padding: 20px 24px; background: rgba(248, 250, 252, 0.6); border-bottom: 1px solid var(--border-glass); }
+.pillar-header h3 { font-family: var(--font-display); font-size: 1.1rem; letter-spacing: 1px; color: var(--text-bright); }
+.pillar-sub { font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted); }
+.pillar-body { padding: 20px 24px; }
+.skill-category { margin-bottom: 20px; }
+.skill-category h4 { font-family: var(--font-mono); font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 10px; text-transform: uppercase; font-weight: 600; }
+
+.skill-bars { display: flex; flex-direction: column; gap: 10px; }
+.skill-bar-item { display: flex; flex-direction: column; gap: 4px; }
+.skill-name { font-family: var(--font-mono); font-size: 0.8rem; font-weight: 600; color: var(--text-primary); }
+.bar-track { height: 6px; background: rgba(100, 116, 139, 0.15); border-radius: 3px; overflow: hidden; }
+.bar-fill { height: 100%; border-radius: 3px; transition: width 1s ease-in-out; }
+.bar-cyan { background: var(--grad-cyan-purple); }
+.bar-gold { background: var(--grad-gold-orange); }
+.bar-magenta { background: var(--grad-purple-pink); }
+
+.tool-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.tool-chip { font-family: var(--font-mono); font-size: 0.78rem; font-weight: 600; padding: 4px 10px; border-radius: 14px; background: rgba(241, 245, 249, 0.8); border: 1px solid var(--border-glass); }
+.chip-cyan { color: var(--neon-cyan); border-color: rgba(2, 132, 199, 0.3); }
+.chip-gold { color: var(--neon-gold); border-color: rgba(217, 119, 6, 0.3); }
+.chip-magenta { color: var(--neon-magenta); border-color: rgba(219, 39, 119, 0.3); }
+
+/* PROJECTS & DIAGRAMS */
+.project-filters { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-bottom: 35px; }
+.filter-btn { font-family: var(--font-mono); font-size: 0.8rem; font-weight: 700; letter-spacing: 1.5px; padding: 8px 18px; border-radius: 20px; background: rgba(255, 255, 255, 0.75); border: 1px solid var(--border-glass); color: var(--text-secondary); cursor: pointer; transition: all 0.3s ease; }
+.filter-btn.active, .filter-btn:hover { background: var(--grad-vibrant-3); color: #ffffff; border-color: transparent; box-shadow: 0 4px 20px rgba(124, 58, 237, 0.35); }
+
+.projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 28px; }
+.project-card { background: var(--bg-card-glass); border-radius: var(--card-radius); border: 1px solid var(--border-glass); backdrop-filter: blur(16px); overflow: hidden; position: relative; transition: all 0.35s ease; display: flex; flex-direction: column; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04); }
+.project-card:hover { transform: translateY(-7px); border-color: var(--border-purple); box-shadow: 0 14px 35px rgba(124, 58, 237, 0.22); }
+.project-card.featured { grid-column: 1 / -1; display: grid; grid-template-columns: 1.2fr 1fr; align-items: center; border: 1px solid var(--border-magenta); }
+
+.diagram-preview-box { position: relative; width: 100%; height: 210px; background: #f8fafc; overflow: hidden; cursor: pointer; border-bottom: 1px solid var(--border-glass); }
+.project-card.featured .diagram-preview-box { height: 100%; min-height: 300px; border-bottom: none; border-right: 1px solid var(--border-glass); }
+.diagram-img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
+.diagram-preview-box:hover .diagram-img { transform: scale(1.05); }
+
+.diagram-scanline { position: absolute; top: 0; left: 0; width: 100%; height: 3px; background: linear-gradient(90deg, transparent, #0284c7, #7c3aed, transparent); box-shadow: 0 0 12px #0284c7; animation: scanlineSweep 4s linear infinite; pointer-events: none; }
+@keyframes scanlineSweep { 0% { top: 0; } 50% { top: 100%; } 100% { top: 0; } }
+
+.inspect-btn { position: absolute; bottom: 12px; right: 12px; background: rgba(255, 255, 255, 0.92); border: 1px solid var(--neon-cyan); color: var(--neon-cyan); font-family: var(--font-mono); font-size: 0.72rem; font-weight: bold; padding: 6px 12px; border-radius: 16px; backdrop-filter: blur(8px); cursor: pointer; transition: all 0.3s ease; box-shadow: 0 2px 10px rgba(0,0,0,0.08); }
+.diagram-preview-box:hover .inspect-btn { background: var(--neon-cyan); color: #ffffff; box-shadow: 0 4px 15px var(--neon-cyan); }
+
+.project-content-inner { padding: 20px; display: flex; flex-direction: column; flex-grow: 1; }
+.project-badge { font-family: var(--font-mono); font-size: 0.7rem; font-weight: 700; letter-spacing: 1.5px; display: inline-block; padding: 4px 10px; border-radius: 4px; margin-bottom: 10px; width: fit-content; }
+.badge-cyan { background: rgba(2, 132, 199, 0.1); color: var(--neon-cyan); border: 1px solid var(--border-cyan); }
+.badge-purple { background: rgba(124, 58, 237, 0.1); color: var(--neon-purple); border: 1px solid var(--border-purple); }
+.badge-magenta { background: rgba(219, 39, 119, 0.1); color: var(--neon-magenta); border: 1px solid var(--border-magenta); }
+.badge-gold { background: rgba(217, 119, 6, 0.1); color: var(--neon-gold); border: 1px solid rgba(217, 119, 6, 0.4); }
+.badge-emerald { background: rgba(5, 150, 105, 0.1); color: var(--neon-emerald); border: 1px solid rgba(5, 150, 105, 0.4); }
+
+.project-title { font-family: var(--font-display); font-size: 1.1rem; color: var(--text-bright); margin-bottom: 8px; line-height: 1.3; }
+.project-desc { font-size: 0.88rem; color: var(--text-secondary); margin-bottom: 14px; line-height: 1.5; }
+
+.live-anim-widget { background: rgba(241, 245, 249, 0.9); border: 1px solid rgba(124, 58, 237, 0.15); border-radius: 8px; padding: 10px 14px; margin-bottom: 14px; font-family: var(--font-mono); font-size: 0.78rem; }
+.widget-title { font-size: 0.68rem; color: var(--neon-purple); font-weight: 700; letter-spacing: 1px; margin-bottom: 8px; text-transform: uppercase; }
+
+.pipeline-stages { display: flex; align-items: center; gap: 4px; }
+.stage-box { padding: 3px 6px; border-radius: 4px; background: rgba(2, 132, 199, 0.1); border: 1px solid var(--border-cyan); color: var(--neon-cyan); font-size: 0.7rem; font-weight: bold; position: relative; overflow: hidden; }
+.stage-arrow { color: var(--text-muted); font-size: 0.7rem; }
+.p-packet { position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent); animation: packetFlow 2s infinite linear; }
+@keyframes packetFlow { 0% { left: -100%; } 100% { left: 100%; } }
+
+.fifo-cells { display: flex; gap: 6px; margin-bottom: 6px; }
+.fifo-cell { flex: 1; text-align: center; padding: 4px; border-radius: 4px; font-size: 0.72rem; font-weight: bold; }
+.active-cell { background: rgba(2, 132, 199, 0.2); color: var(--neon-cyan); border: 1px solid var(--neon-cyan); }
+.empty-cell { background: rgba(203, 213, 225, 0.3); color: var(--text-muted); border: 1px dashed rgba(100,116,139,0.3); }
+
+.asic-steps { display: flex; align-items: center; gap: 4px; flex-wrap: wrap; }
+.step-badge { font-size: 0.68rem; padding: 2px 6px; border-radius: 4px; }
+.step-badge.done { background: rgba(5, 150, 105, 0.15); color: var(--neon-emerald); border: 1px solid var(--neon-emerald); font-weight: bold; }
+.step-badge.active-step { background: rgba(217, 119, 6, 0.15); color: var(--neon-gold); border: 1px solid var(--neon-gold); font-weight: bold; }
+.step-badge.active-gdsii { background: rgba(124, 58, 237, 0.2); color: var(--neon-purple); border: 1px solid var(--neon-purple); font-weight: bold; }
+
+.vtc-display { display: flex; align-items: center; gap: 8px; color: var(--text-secondary); }
+.vtc-val strong { color: var(--neon-cyan); }
+
+.cdc-domains { display: flex; align-items: center; justify-content: space-between; }
+.domain-box { font-size: 0.7rem; padding: 3px 6px; border-radius: 4px; background: rgba(124, 58, 237, 0.1); color: var(--neon-purple); border: 1px solid var(--border-purple); font-weight: bold; }
+.sync-ff-pair { font-size: 0.7rem; color: var(--neon-magenta); font-weight: bold; }
+
+.wave-signals { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.sig-badge { font-size: 0.68rem; padding: 2px 6px; border-radius: 4px; background: rgba(203,213,225,0.4); color: var(--text-muted); }
+.sig-badge.active-sig { background: rgba(219, 39, 119, 0.15); color: var(--neon-magenta); border: 1px solid var(--border-magenta); font-weight: bold; }
+
+.bcd-reg { display: flex; flex-direction: column; gap: 2px; }
+.gold-code { color: var(--neon-gold); font-weight: bold; }
+
+.cla-signals { display: flex; gap: 6px; flex-wrap: wrap; }
+.cla-chip { font-size: 0.68rem; padding: 2px 6px; border-radius: 4px; background: rgba(2,132,199,0.1); color: var(--neon-cyan); font-weight: bold; }
+.active-carry { background: rgba(217,119,6,0.15); color: var(--neon-gold); border: 1px solid var(--neon-gold); }
+
+.cache-status { display: flex; align-items: center; gap: 8px; }
+.hit-badge { padding: 2px 8px; border-radius: 4px; background: rgba(5, 150, 105, 0.2); color: var(--neon-emerald); font-weight: bold; }
+
+.sat-box { display: flex; flex-direction: column; gap: 2px; color: var(--neon-emerald); font-weight: bold; }
+.counter-display { display: flex; align-items: center; gap: 8px; }
+.counter-bit { padding: 4px 8px; border-radius: 4px; background: rgba(2, 132, 199, 0.15); color: var(--neon-cyan); font-weight: bold; border: 1px solid var(--border-cyan); }
+
+.attn-heatmap { display: flex; gap: 6px; align-items: center; }
+.attn-cell { padding: 2px 6px; border-radius: 4px; font-size: 0.7rem; background: rgba(219,39,119,0.1); color: var(--neon-magenta); }
+.attn-cell.fake-alert { background: rgba(225,29,72,0.2); color: var(--neon-pink); font-weight: bold; border: 1px solid var(--neon-pink); }
+
+.nlp-bars { display: flex; flex-direction: column; gap: 4px; }
+.nlp-item { display: flex; align-items: center; gap: 8px; }
+.nlp-label { width: 60px; font-size: 0.7rem; color: var(--text-muted); }
+.nlp-track { flex: 1; height: 10px; background: rgba(203,213,225,0.4); border-radius: 5px; overflow: hidden; }
+.nlp-fill { height: 100%; font-size: 0.6rem; color: #fff; text-align: right; padding-right: 4px; line-height: 10px; font-weight: bold; }
+.nlp-fill.pos { background: var(--neon-cyan); }
+.nlp-fill.neu { background: var(--neon-purple); }
+.nlp-fill.neg { background: var(--neon-magenta); }
+
+.project-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
+.project-tags span { font-family: var(--font-mono); font-size: 0.75rem; font-weight: 600; padding: 2px 8px; border-radius: 10px; background: rgba(241,245,249,0.9); color: var(--text-secondary); }
+.project-meta { font-family: var(--font-mono); font-size: 0.75rem; font-weight: 600; color: var(--text-muted); margin-bottom: 14px; margin-top: auto; }
+.project-link { font-family: var(--font-mono); font-size: 0.8rem; font-weight: 700; letter-spacing: 1px; display: inline-flex; align-items: center; gap: 6px; color: var(--neon-purple); transition: all 0.3s ease; width: fit-content; }
+.project-link:hover { color: var(--neon-cyan); transform: translateX(4px); }
+
+/* EXPERIENCE & CERTS & UPDATES & CONTACT */
+.timeline { display: flex; flex-direction: column; gap: 24px; max-width: 800px; margin: 0 auto; }
+.timeline-item { padding: 24px; border-radius: var(--card-radius); background: var(--bg-card-glass); backdrop-filter: blur(14px); border: 1px solid var(--border-glass); transition: all 0.3s ease; box-shadow: 0 4px 20px rgba(0,0,0,0.04); }
+.glowing-border-cyan { border-left: 4px solid var(--neon-cyan); }
+.glowing-border-purple { border-left: 4px solid var(--neon-purple); }
+.glowing-border-pink { border-left: 4px solid var(--neon-magenta); }
+.timeline-item:hover { transform: translateX(6px); }
+
+.timeline-date { font-family: var(--font-mono); font-size: 0.85rem; font-weight: bold; margin-bottom: 6px; display: block; }
+.date-cyan { color: var(--neon-cyan); }
+.date-purple { color: var(--neon-purple); }
+.date-pink { color: var(--neon-magenta); }
+.timeline-content h3 { font-family: var(--font-display); font-size: 1.15rem; color: var(--text-bright); margin-bottom: 4px; }
+.timeline-content p { color: var(--text-secondary); font-size: 0.95rem; }
+
+.certs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
+.cert-card { padding: 20px; border-radius: var(--card-radius); background: var(--bg-card-glass); backdrop-filter: blur(14px); border: 1px solid var(--border-glass); transition: all 0.3s ease; box-shadow: 0 4px 20px rgba(0,0,0,0.04); }
+.cert-gold { border-top: 3px solid var(--neon-gold); }
+.cert-cyan { border-top: 3px solid var(--neon-cyan); }
+.cert-purple { border-top: 3px solid var(--neon-purple); }
+.cert-pink { border-top: 3px solid var(--neon-pink); }
+.cert-card:hover { transform: translateY(-4px); }
+.cert-icon { font-size: 1.8rem; margin-bottom: 12px; }
+.cert-card h4 { font-family: var(--font-display); font-size: 1rem; color: var(--text-bright); margin-bottom: 6px; }
+.cert-card p { font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 12px; }
+
+.update-controls { display: flex; justify-content: center; margin-bottom: 30px; }
+.auth-card-wrapper, .update-form-wrapper { max-width: 550px; margin: 0 auto 40px auto; }
+.auth-body { padding: 24px; display: flex; flex-direction: column; gap: 16px; text-align: center; }
+.auth-instruction { font-family: var(--font-mono); font-size: 0.9rem; color: var(--text-secondary); }
+.auth-error { font-family: var(--font-mono); font-size: 0.82rem; color: var(--neon-pink); background: rgba(225, 29, 72, 0.1); padding: 8px 12px; border-radius: 6px; border: 1px solid var(--neon-pink); }
+
+.update-form-container { background: rgba(255, 255, 255, 0.95); border-radius: var(--card-radius); overflow: hidden; border: 1px solid var(--border-purple); box-shadow: var(--glow-purple); }
+.update-form { padding: 24px; display: flex; flex-direction: column; gap: 16px; }
+.form-group { display: flex; flex-direction: column; gap: 6px; text-align: left; }
+.form-group label { font-family: var(--font-mono); font-size: 0.8rem; font-weight: 600; color: var(--neon-purple); }
+.form-group input, .form-group select, .form-group textarea {
+  padding: 10px 14px; background: rgba(241, 245, 249, 0.8); border: 1px solid var(--border-glass); border-radius: 6px; color: var(--text-primary); font-family: var(--font-body); font-size: 0.95rem;
+}
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: var(--neon-purple); box-shadow: 0 0 10px rgba(124, 58, 237, 0.2); }
+.form-actions { display: flex; gap: 12px; margin-top: 10px; justify-content: center; }
+
+.updates-timeline { display: flex; flex-direction: column; gap: 16px; max-width: 800px; margin: 0 auto; }
+.update-entry { padding: 20px; background: var(--bg-card-glass); border-radius: var(--card-radius); border-left: 4px solid var(--neon-cyan); border: 1px solid var(--border-glass); border-left-width: 4px; box-shadow: 0 4px 20px rgba(0,0,0,0.04); }
+.update-header { display: flex; justify-content: space-between; margin-bottom: 8px; }
+.update-cat-badge { font-family: var(--font-mono); font-size: 0.75rem; font-weight: bold; }
+.update-date { font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-muted); }
+
+.contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
+.contact-card { padding: 24px; border-radius: var(--card-radius); background: var(--bg-card-glass); border: 1px solid var(--border-glass); backdrop-filter: blur(14px); text-align: center; transition: all 0.3s ease; box-shadow: 0 4px 20px rgba(0,0,0,0.04); }
+.contact-card:hover { transform: translateY(-6px); box-shadow: 0 10px 30px rgba(124, 58, 237, 0.18); }
+.contact-icon { font-size: 2rem; margin-bottom: 12px; }
+.contact-card h4 { font-family: var(--font-display); font-size: 1.1rem; color: var(--text-bright); margin-bottom: 4px; }
+.contact-card p { font-family: var(--font-mono); font-size: 0.9rem; font-weight: 600; color: var(--neon-purple); }
+
+/* LIGHTBOX MODAL */
+.diagram-modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; z-index: 2000; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
+.diagram-modal.open { opacity: 1; pointer-events: auto; }
+.modal-backdrop { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(16px); }
+.modal-window { position: relative; z-index: 2001; width: 90%; max-width: 1000px; max-height: 90vh; background: rgba(255, 255, 255, 0.96); border: 1px solid var(--border-purple); border-radius: var(--card-radius); box-shadow: 0 20px 60px rgba(124, 58, 237, 0.25); display: flex; flex-direction: column; overflow: hidden; }
+
+.modal-header { padding: 16px 24px; background: rgba(248, 250, 252, 0.95); border-bottom: 1px solid var(--border-glass); display: flex; justify-content: space-between; align-items: center; }
+.modal-title-wrap { display: flex; align-items: center; gap: 10px; }
+.modal-title { font-family: var(--font-display); font-size: 1.2rem; color: var(--text-bright); }
+.modal-close { background: none; border: none; color: var(--text-muted); font-size: 1.4rem; cursor: pointer; }
+.modal-close:hover { color: var(--neon-pink); }
+
+.modal-body { padding: 24px; overflow-y: auto; display: flex; flex-direction: column; gap: 20px; }
+.modal-img-container { width: 100%; border-radius: 8px; overflow: hidden; background: #fff; border: 1px solid var(--border-glass); }
+.modal-img-container img { width: 100%; height: auto; max-height: 60vh; object-fit: contain; display: block; }
+.modal-description-box { font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6; background: rgba(241, 245, 249, 0.8); padding: 16px; border-radius: 6px; border-left: 3px solid var(--neon-cyan); }
+
+.modal-footer { padding: 14px 24px; background: rgba(248, 250, 252, 0.95); border-top: 1px solid var(--border-glass); display: flex; justify-content: space-between; align-items: center; }
+.modal-tech-tag { font-family: var(--font-mono); font-size: 0.75rem; font-weight: 600; color: var(--neon-purple); }
+
+.footer { padding: 30px 5%; text-align: center; background: rgba(255, 255, 255, 0.9); border-top: 1px solid var(--border-purple); position: relative; z-index: 2; }
+.footer-text { font-family: var(--font-mono); font-size: 0.85rem; font-weight: 600; color: var(--text-primary); letter-spacing: 2px; }
+.footer-sub { font-family: var(--font-mono); font-size: 0.75rem; font-weight: 600; color: var(--neon-purple); margin-top: 6px; }
+
+@media (max-width: 900px) {
+  .about-grid, .project-card.featured { grid-template-columns: 1fr; }
+  .nav-links { display: none; }
+  .nav-hamburger { display: flex; }
+  .hero-stats { flex-direction: column; gap: 16px; }
+  .book-controls { width: 92%; padding: 8px 16px; gap: 10px; }
+  .page-nav-btn { font-size: 0.75rem; padding: 6px 12px; }
+  .page-label { display: none; }
+}
+
+</style>
+</head>
+<body class="colorful-theme book-mode">
+    <!-- Ambient Background Glow Mesh -->
+    <div class="ambient-glow glow-1"></div>
+    <div class="ambient-glow glow-2"></div>
+    <div class="ambient-glow glow-3"></div>
+    <div class="ambient-glow glow-4"></div>
+
+    <!-- Digital Signals & Circuits Moving Background Canvas -->
+    <canvas id="particles-canvas"></canvas>
+
+    <!-- Navigation Bar -->
+    <nav id="main-nav" class="nav-bar">
+        <div class="nav-logo">
+            <span class="logo-bracket">[</span>
+            <span class="logo-text">DURGESH DONGRE</span>
+            <span class="logo-bracket">]</span>
+        </div>
+        <div class="nav-links">
+            <a href="#hero" class="nav-link active" data-page="1">HOME</a>
+            <a href="#about" class="nav-link" data-page="2">ABOUT</a>
+            <a href="#skills" class="nav-link" data-page="3">SKILLS</a>
+            <a href="#projects" class="nav-link" data-page="4">PROJECTS</a>
+            <a href="#experience" class="nav-link" data-page="5">EXPERIENCE</a>
+            <a href="#certifications" class="nav-link" data-page="6">CERTS</a>
+            <a href="#contact" class="nav-link" data-page="7">CONTACT</a>
+        </div>
+        <button class="nav-hamburger" id="nav-hamburger" aria-label="Toggle navigation menu">
+            <span></span><span></span><span></span>
+        </button>
+    </nav>
+
+    <!-- Mobile Navigation -->
+    <div class="mobile-menu" id="mobile-menu">
+        <a href="#hero" class="mobile-link" data-page="1">HOME</a>
+        <a href="#about" class="mobile-link" data-page="2">ABOUT</a>
+        <a href="#skills" class="mobile-link" data-page="3">SKILLS</a>
+        <a href="#projects" class="mobile-link" data-page="4">PROJECTS</a>
+        <a href="#experience" class="mobile-link" data-page="5">EXPERIENCE</a>
+        <a href="#certifications" class="mobile-link" data-page="6">CERTS</a>
+        <a href="#contact" class="mobile-link" data-page="7">CONTACT</a>
+    </div>
+
+    <!-- ===== 3D BOOK LOGBOOK VIEWPORT ===== -->
+    <main class="book-viewport">
+        <div class="book-container" id="book-container">
+
+            <!-- PAGE 1: HERO SECTION -->
+            <section id="hero" class="section book-page page-1 active-page" data-page="1" data-title="HOME LOG">
+                <div class="page-corner-fold"></div>
+                <div class="hero-content">
+                    <div class="hero-badge-pill">
+                        <span class="pulse-dot"></span> ELECTRICAL ENGINEERING • M.TECH @ IIT KANPUR
+                    </div>
+                    <h1 class="hero-name" data-text="DURGESH DONGRE">DURGESH DONGRE</h1>
+                    <p class="hero-subtitle typewriter" id="hero-subtitle">INITIALIZING SYSTEM...</p>
+                    
+                    <div class="hero-title-bar">
+                        <span class="hero-tag tag-cyan">VLSI DESIGN</span>
+                        <span class="hero-divider">◆</span>
+                        <span class="hero-tag tag-purple">ASIC FLOW</span>
+                        <span class="hero-divider">◆</span>
+                        <span class="hero-tag tag-magenta">COMPUTER ARCHITECTURE</span>
+                        <span class="hero-divider">◆</span>
+                        <span class="hero-tag tag-emerald">AI / ML</span>
+                    </div>
+
+                    <div class="hero-stats">
+                        <div class="stat-block block-cyan">
+                            <span class="stat-number" data-target="14">14+</span>
+                            <span class="stat-label">HARDWARE PROJECTS</span>
+                        </div>
+                        <div class="stat-block block-purple">
+                            <span class="stat-number" data-target="20">20+</span>
+                            <span class="stat-label">EDA & VLSI TOOLS</span>
+                        </div>
+                        <div class="stat-block block-pink">
+                            <span class="stat-number" data-target="8">8+</span>
+                            <span class="stat-label">CERTIFICATIONS</span>
+                        </div>
+                    </div>
+
+                    <div class="hero-cta">
+                        <button class="cta-btn primary-btn btn-vibrant" id="hero-turn-page-btn">
+                            <span class="btn-text">EXPLORE PROJECTS (SCROLL OR FLIP) ➔</span>
+                        </button>
+                        <a href="#contact" class="cta-btn secondary-btn btn-glass" data-page="8">
+                            <span class="btn-text">GET IN TOUCH</span>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PAGE 2: ABOUT SECTION -->
+            <section id="about" class="section book-page page-2" data-page="2" data-title="SYSTEM PROFILE">
+                <div class="page-corner-fold"></div>
+                <div class="page-content-wrapper">
+                    <div class="section-header text-center">
+                        <span class="section-tag">// PAGE 02</span>
+                        <h2 class="section-title title-gradient-1">SYSTEM PROFILE</h2>
+                        <div class="section-line line-gradient-1"></div>
+                    </div>
+                    <div class="about-grid">
+                        <div class="about-terminal glowing-border-purple">
+                            <div class="terminal-header">
+                                <span class="terminal-dot red"></span>
+                                <span class="terminal-dot yellow"></span>
+                                <span class="terminal-dot green"></span>
+                                <span class="terminal-title">profile.sys</span>
+                            </div>
+                            <div class="terminal-body">
+                                <p><span class="cmd-prompt">$</span> <span class="cmd-key">name</span>: Durgesh Dongre</p>
+                                <p><span class="cmd-prompt">$</span> <span class="cmd-key">degree</span>: M.Tech Student — Electrical Engineering</p>
+                                <p><span class="cmd-prompt">$</span> <span class="cmd-key">institute</span>: Indian Institute of Technology, Kanpur</p>
+                                <p><span class="cmd-prompt">$</span> <span class="cmd-key">department</span>: Electrical Engineering</p>
+                                <p><span class="cmd-prompt">$</span> <span class="cmd-key">thesis</span>: Federated Continual Learning for Salient Object Segmentation across Commercial Image Sources</p>
+                                <p><span class="cmd-prompt">$</span> <span class="cmd-key">advisor</span>: Prof. Koteswar Rao Jerripothula</p>
+                                <p><span class="cmd-prompt">$</span> <span class="cmd-key">focus</span>: [ VLSI Design, ASIC Flow, Computer Architecture, AI/ML, Federated Learning ]</p>
+                                <p><span class="cmd-prompt">$</span> <span class="cmd-key">hobbies</span>: Singing | Astronomy | Sketching</p>
+                            </div>
+                        </div>
+                        <div class="about-cards">
+                            <div class="info-card colorful-card-1" id="about-edu">
+                                <div class="card-icon">🎓</div>
+                                <h3>Education</h3>
+                                <div class="edu-item">
+                                    <span class="edu-year">2024–Present</span>
+                                    <span class="edu-degree">M.Tech — IIT Kanpur</span>
+                                    <span class="edu-badge">Electrical Engineering</span>
+                                </div>
+                                <div class="edu-item">
+                                    <span class="edu-year">2018–2022</span>
+                                    <span class="edu-degree">B.E. — RTMNU, Nagpur</span>
+                                    <span class="edu-badge">Electrical Engineering</span>
+                                </div>
+                            </div>
+                            <div class="info-card colorful-card-2" id="about-interests">
+                                <div class="card-icon">🔬</div>
+                                <h3>Areas of Interest</h3>
+                                <div class="interest-tags">
+                                    <span class="interest-tag tag-cyan">Digital IC Design</span>
+                                    <span class="interest-tag tag-magenta">STA</span>
+                                    <span class="interest-tag tag-purple">SoC Architecture</span>
+                                    <span class="interest-tag tag-gold">DFT</span>
+                                    <span class="interest-tag tag-emerald">Physical Design</span>
+                                    <span class="interest-tag tag-pink">RTL Verification</span>
+                                    <span class="interest-tag tag-cyan">RTL Design</span>
+                                    <span class="interest-tag tag-purple">RTL to GDSII</span>
+                                    <span class="interest-tag tag-magenta">CDC</span>
+                                    <span class="interest-tag tag-gold">Computer Architecture</span>
+                                    <span class="interest-tag tag-emerald">ASIC Design Flow</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PAGE 3: SKILLS SECTION -->
+            <section id="skills" class="section book-page page-3" data-page="3" data-title="TECHNICAL ARSENAL">
+                <div class="page-corner-fold"></div>
+                <div class="page-content-wrapper">
+                    <div class="section-header text-center">
+                        <span class="section-tag">// PAGE 03</span>
+                        <h2 class="section-title title-gradient-2">TECHNICAL ARSENAL</h2>
+                        <div class="section-line line-gradient-2"></div>
+                    </div>
+                    <div class="skills-pillars">
+                        <!-- Pillar 1: VLSI / ASIC -->
+                        <div class="skill-pillar pillar-cyan" id="skill-vlsi">
+                            <div class="pillar-header vlsi-color">
+                                <div class="pillar-icon">⚡</div>
+                                <h3>DIGITAL VLSI / ASIC</h3>
+                                <p class="pillar-sub">RTL → Verification → Synthesis → STA → PD → GDSII</p>
+                            </div>
+                            <div class="pillar-body">
+                                <div class="skill-category">
+                                    <h4>HDL & Programming</h4>
+                                    <div class="skill-bars">
+                                        <div class="skill-bar-item"><span class="skill-name">Verilog HDL</span><div class="bar-track"><div class="bar-fill bar-cyan" style="width: 92%"></div></div></div>
+                                        <div class="skill-bar-item"><span class="skill-name">SystemVerilog</span><div class="bar-track"><div class="bar-fill bar-cyan" style="width: 65%"></div></div></div>
+                                        <div class="skill-bar-item"><span class="skill-name">TCL</span><div class="bar-track"><div class="bar-fill bar-cyan" style="width: 60%"></div></div></div>
+                                        <div class="skill-bar-item"><span class="skill-name">C / C++</span><div class="bar-track"><div class="bar-fill bar-cyan" style="width: 60%"></div></div></div>
+                                        <div class="skill-bar-item"><span class="skill-name">Bash / Shell</span><div class="bar-track"><div class="bar-fill bar-cyan" style="width: 70%"></div></div></div>
+                                    </div>
+                                </div>
+                                <div class="skill-category">
+                                    <h4>EDA Tools</h4>
+                                    <div class="tool-grid">
+                                        <span class="tool-chip chip-cyan">Xilinx Vivado</span>
+                                        <span class="tool-chip chip-cyan">Cadence Virtuoso</span>
+                                        <span class="tool-chip chip-cyan">ModelSim</span>
+                                        <span class="tool-chip chip-cyan">Synopsys VCS</span>
+                                        <span class="tool-chip chip-cyan">Verdi</span>
+                                        <span class="tool-chip chip-cyan">PrimeTime</span>
+                                        <span class="tool-chip chip-cyan">Yosys</span>
+                                        <span class="tool-chip chip-cyan">OpenSTA</span>
+                                        <span class="tool-chip chip-cyan">OpenLane 2</span>
+                                        <span class="tool-chip chip-cyan">OpenROAD</span>
+                                        <span class="tool-chip chip-cyan">KLayout</span>
+                                        <span class="tool-chip chip-cyan">Magic</span>
+                                        <span class="tool-chip chip-cyan">Xschem</span>
+                                        <span class="tool-chip chip-cyan">ngspice</span>
+                                        <span class="tool-chip chip-cyan">LTspice</span>
+                                        <span class="tool-chip chip-cyan">Quartus Prime</span>
+                                    </div>
+                                </div>
+                                <div class="skill-category">
+                                    <h4>Concepts</h4>
+                                    <div class="tool-grid concept-grid">
+                                        <span class="concept-chip chip-glow-cyan">RTL Design</span>
+                                        <span class="concept-chip chip-glow-cyan">STA</span>
+                                        <span class="concept-chip chip-glow-cyan">CDC</span>
+                                        <span class="concept-chip chip-glow-cyan">Pipelining</span>
+                                        <span class="concept-chip chip-glow-cyan">FSMs</span>
+                                        <span class="concept-chip chip-glow-cyan">FIFO</span>
+                                        <span class="concept-chip chip-glow-cyan">DFT / ATPG</span>
+                                        <span class="concept-chip chip-glow-cyan">Floorplanning</span>
+                                        <span class="concept-chip chip-glow-cyan">Placement</span>
+                                        <span class="concept-chip chip-glow-cyan">CTS</span>
+                                        <span class="concept-chip chip-glow-cyan">Routing</span>
+                                        <span class="concept-chip chip-glow-cyan">SKY130 PDK</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Pillar 2: Computer Architecture -->
+                        <div class="skill-pillar pillar-gold" id="skill-arch">
+                            <div class="pillar-header arch-color">
+                                <div class="pillar-icon">🔧</div>
+                                <h3>COMPUTER ARCHITECTURE</h3>
+                                <p class="pillar-sub">Processor → Pipeline → Cache → FIFO → AMBA → SoC</p>
+                            </div>
+                            <div class="pillar-body">
+                                <div class="skill-category">
+                                    <h4>Processor Design</h4>
+                                    <div class="tool-grid">
+                                        <span class="tool-chip chip-gold">MIPS32 Pipeline</span>
+                                        <span class="tool-chip chip-gold">16-bit RISC</span>
+                                        <span class="tool-chip chip-gold">PicoRV32 RISC-V</span>
+                                        <span class="tool-chip chip-gold">5-Stage Pipeline</span>
+                                    </div>
+                                </div>
+                                <div class="skill-category">
+                                    <h4>Memory & Interconnects</h4>
+                                    <div class="tool-grid">
+                                        <span class="tool-chip chip-gold">L1 Cache</span>
+                                        <span class="tool-chip chip-gold">SRAM</span>
+                                        <span class="tool-chip chip-gold">Sync FIFO</span>
+                                        <span class="tool-chip chip-gold">Async FIFO</span>
+                                        <span class="tool-chip chip-gold">AHB-APB Bridge</span>
+                                        <span class="tool-chip chip-gold">AMBA Protocol</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Pillar 3: AI / ML -->
+                        <div class="skill-pillar pillar-magenta" id="skill-ai">
+                            <div class="pillar-header ai-color">
+                                <div class="pillar-icon">🧠</div>
+                                <h3>AI / ML / COMPUTER VISION</h3>
+                                <p class="pillar-sub">Python → ML → Deep Learning → CV → Federated Learning</p>
+                            </div>
+                            <div class="pillar-body">
+                                <div class="skill-category">
+                                    <h4>Languages & Libraries</h4>
+                                    <div class="skill-bars">
+                                        <div class="skill-bar-item"><span class="skill-name">Python</span><div class="bar-track"><div class="bar-fill bar-magenta" style="width: 85%"></div></div></div>
+                                        <div class="skill-bar-item"><span class="skill-name">PyTorch</span><div class="bar-track"><div class="bar-fill bar-magenta" style="width: 80%"></div></div></div>
+                                        <div class="skill-bar-item"><span class="skill-name">NumPy / Pandas</span><div class="bar-track"><div class="bar-fill bar-magenta" style="width: 75%"></div></div></div>
+                                        <div class="skill-bar-item"><span class="skill-name">Scikit-learn</span><div class="bar-track"><div class="bar-fill bar-magenta" style="width: 70%"></div></div></div>
+                                    </div>
+                                </div>
+                                <div class="skill-category">
+                                    <h4>Domains</h4>
+                                    <div class="tool-grid">
+                                        <span class="tool-chip chip-magenta">Computer Vision</span>
+                                        <span class="tool-chip chip-magenta">Semantic Segmentation</span>
+                                        <span class="tool-chip chip-magenta">Federated Learning</span>
+                                        <span class="tool-chip chip-magenta">NLP</span>
+                                        <span class="tool-chip chip-magenta">Transformers</span>
+                                        <span class="tool-chip chip-magenta">Deepfake Detection</span>
+                                    </div>
+                                </div>
+                                <div class="skill-category">
+                                    <h4>Dev Environment</h4>
+                                    <div class="tool-grid">
+                                        <span class="tool-chip chip-magenta">Linux / Ubuntu</span>
+                                        <span class="tool-chip chip-magenta">Docker</span>
+                                        <span class="tool-chip chip-magenta">Git / GitHub</span>
+                                        <span class="tool-chip chip-magenta">VS Code</span>
+                                        <span class="tool-chip chip-magenta">Jupyter</span>
+                                        <span class="tool-chip chip-magenta">LaTeX</span>
+                                        <span class="tool-chip chip-magenta">MATLAB</span>
+                                        <span class="tool-chip chip-magenta">WSL</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PAGE 4: PROJECTS SECTION -->
+            <section id="projects" class="section book-page page-4" data-page="4" data-title="PROJECT ARCHIVE">
+                <div class="page-corner-fold"></div>
+                <div class="page-content-wrapper">
+                    <div class="section-header text-center">
+                        <span class="section-tag">// PAGE 04</span>
+                        <h2 class="section-title title-gradient-3">PROJECT ARCHIVE & ANIMATED DIAGRAMS</h2>
+                        <div class="section-line line-gradient-3"></div>
+                        <p class="section-subtitle">Interactive hardware schematics, pipeline visualizers, and architecture diagrams for every project.</p>
+                    </div>
+
+                    <!-- Filter Bar -->
+                    <div class="project-filters">
+                        <button class="filter-btn active" data-filter="all">ALL SYSTEMS</button>
+                        <button class="filter-btn" data-filter="vlsi">VLSI / RTL</button>
+                        <button class="filter-btn" data-filter="asic">ASIC / PD</button>
+                        <button class="filter-btn" data-filter="arch">ARCHITECTURE</button>
+                        <button class="filter-btn" data-filter="ai">AI / ML</button>
+                    </div>
+
+                    <div class="projects-grid" id="projects-grid">
+
+                        <!-- 1. THESIS PROJECT -->
+                        <div class="project-card featured" data-category="ai" id="proj-thesis">
+                            <div class="diagram-preview-box" data-diagram="assets/images/federated_learning.jpg" data-title="Federated Continual Learning Architecture" data-desc="Central server aggregation connected to distributed hospital nodes (MRI/CT scans) with EWC knowledge distillation.">
+                                <img src="assets/images/federated_learning.jpg" alt="Federated Learning Diagram" class="diagram-img">
+                                <div class="diagram-scanline"></div>
+                                <button class="inspect-btn">
+                                    <span class="inspect-icon">🔍</span> INSPECT ARCHITECTURE DIAGRAM
+                                </button>
+                            </div>
+
+                            <div class="project-content-inner">
+                                <div class="project-badge badge-magenta">M.TECH THESIS</div>
+                                <h3 class="project-title">Federated Continual Learning for Salient Object Segmentation</h3>
+                                <p class="project-desc">Developing a privacy-preserving federated learning framework for dense binary-mask segmentation across 8 commercial domains, extending toward continual federated learning to handle sequential, non-stationary data streams while ensuring knowledge retention and mitigating catastrophic forgetting.</p>
+
+                                <div class="live-anim-widget widget-fl">
+                                    <div class="widget-title">LIVE CLIENT-SERVER AGGREGATION SIMULATOR</div>
+                                    <div class="fl-nodes">
+                                        <div class="fl-node client">Client 1<br><small>Hospital A</small></div>
+                                        <div class="fl-center-node pulse-purple">Server<br><small>FedAvg</small></div>
+                                        <div class="fl-node client">Client 2<br><small>Hospital B</small></div>
+                                    </div>
+                                </div>
+
+                                <div class="project-tags">
+                                    <span class="tag-magenta">FedAvg</span><span class="tag-magenta">FedCyclic</span><span class="tag-magenta">FedStar</span><span class="tag-magenta">PyTorch</span><span class="tag-magenta">VST</span>
+                                </div>
+                                <div class="project-meta">
+                                    <span class="meta-date">Jul 2025 — Present</span>
+                                    <span class="meta-guide">Guide: Prof. K. R. Jerripothula</span>
+                                </div>
+                                <a href="https://github.com/Durgesh1029/Federated-Learning-Commercial-Images" class="project-link link-magenta" target="_blank" rel="noopener">
+                                    <span>VIEW ON GITHUB ➔</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- 2. Project: MIPS Processor -->
+                        <div class="project-card" data-category="vlsi arch" id="proj-mips">
+                            <div class="diagram-preview-box" data-diagram="assets/images/mips.png" data-title="Pipelined 32-bit MIPS Processor Architecture" data-desc="Complete 5-stage pipeline hardware layout: IF (Instruction Fetch), ID (Decode), EX (Execute ALU), MEM (Data Memory), WB (Write Back).">
+                                <img src="assets/images/mips.png" alt="MIPS Processor Diagram" class="diagram-img">
+                                <div class="diagram-scanline"></div>
+                                <button class="inspect-btn">
+                                    <span class="inspect-icon">🔍</span> INSPECT MIPS SCHEMATIC
+                                </button>
+                            </div>
+
+                            <div class="project-content-inner">
+                                <div class="project-badge badge-cyan">MIPS32 PIPELINE</div>
+                                <h3 class="project-title">Pipelined 32-bit MIPS Processor — Verilog HDL</h3>
+                                <p class="project-desc">Designed a five-stage pipelined MIPS32 processor (IF, ID, EX, MEM, WB) with latches, validated using testbenches and timing diagrams.</p>
+
+                                <div class="live-anim-widget widget-pipeline">
+                                    <div class="widget-title">5-STAGE PIPELINE PACKET FLOW</div>
+                                    <div class="pipeline-stages">
+                                        <div class="stage-box p-if"><span class="p-packet"></span>IF</div>
+                                        <div class="stage-arrow">➔</div>
+                                        <div class="stage-box p-id"><span class="p-packet"></span>ID</div>
+                                        <div class="stage-arrow">➔</div>
+                                        <div class="stage-box p-ex"><span class="p-packet"></span>EX</div>
+                                        <div class="stage-arrow">➔</div>
+                                        <div class="stage-box p-mem"><span class="p-packet"></span>MEM</div>
+                                        <div class="stage-arrow">➔</div>
+                                        <div class="stage-box p-wb"><span class="p-packet"></span>WB</div>
+                                    </div>
+                                </div>
+
+                                <div class="project-tags">
+                                    <span class="tag-cyan">Verilog</span><span class="tag-cyan">Pipeline</span><span class="tag-cyan">MIPS32</span><span class="tag-cyan">RTL</span>
+                                </div>
+                                <div class="project-meta"><span class="meta-date">May 2026</span></div>
+                                <a href="https://github.com/Durgesh1029/Implementation-of-pipelined-32-bit-RISC-MIPS-processor-using-Verilog-HDL" class="project-link link-cyan" target="_blank" rel="noopener">
+                                    <span>VIEW ON GITHUB ➔</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- 3. Project: PicoRV32 RTL-to-GDSII -->
+                        <div class="project-card" data-category="asic arch" id="proj-picorv32">
+                            <div class="diagram-preview-box" data-diagram="assets/images/picorv32_gdsii.jpg" data-title="PicoRV32 RTL-to-GDSII ASIC Flow (Sky130 OpenLane)" data-desc="Complete ASIC physical design steps from Verilog netlist to standard cell placement, CTS, TritonRoute, and final GDSII layout.">
+                                <img src="assets/images/picorv32_gdsii.jpg" alt="PicoRV32 GDSII Diagram" class="diagram-img">
+                                <div class="diagram-scanline"></div>
+                                <button class="inspect-btn">
+                                    <span class="inspect-icon">🔍</span> INSPECT ASIC FLOW
+                                </button>
+                            </div>
+
+                            <div class="project-content-inner">
+                                <div class="project-badge badge-gold">RTL-TO-GDSII</div>
+                                <h3 class="project-title">RTL-to-GDSII — PicoRV32 RISC-V Core on Sky130 PDK</h3>
+                                <p class="project-desc">Executed the complete RTL-to-GDSII ASIC flow for a PicoRV32 RISC-V core using Cadence EDA tools on Sky130 PDK. Performed synthesis, floorplanning, placement, CTS, and routing to generate tapeout-ready GDSII layouts with PPA evaluation.</p>
+
+                                <div class="live-anim-widget widget-asic">
+                                    <div class="widget-title">ASIC TAPE-OUT FLOW STEP TRACKER</div>
+                                    <div class="asic-steps">
+                                        <span class="step-badge done">RTL</span> ➔
+                                        <span class="step-badge done">SYNTH</span> ➔
+                                        <span class="step-badge active-step">FLOORPLAN</span> ➔
+                                        <span class="step-badge done">CTS</span> ➔
+                                        <span class="step-badge active-gdsii">GDSII</span>
+                                    </div>
+                                </div>
+
+                                <div class="project-tags">
+                                    <span class="tag-gold">RISC-V</span><span class="tag-gold">Sky130</span><span class="tag-gold">Cadence</span><span class="tag-gold">GDSII</span><span class="tag-gold">CTS</span>
+                                </div>
+                                <div class="project-meta"><span class="meta-date">Jul 2026</span></div>
+                                <a href="https://github.com/Durgesh1029/RTL-to-GDSII-Implementation-of-a-RISC-V-Core-PicoRV32-on-Sky130-PDK" class="project-link link-gold" target="_blank" rel="noopener">
+                                    <span>VIEW ON GITHUB ➔</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- 4. Project: CMOS Inverter -->
+                        <div class="project-card" data-category="vlsi" id="proj-cmos">
+                            <div class="diagram-preview-box" data-diagram="assets/images/cmos_inverter.jpg" data-title="CMOS Inverter Schematic & VTC Characteristics" data-desc="Transistor schematic (PMOS M1 + NMOS M2) and Voltage Transfer Characteristic (VTC) curve showing threshold VM and noise margins.">
+                                <img src="assets/images/cmos_inverter.jpg" alt="CMOS Inverter Diagram" class="diagram-img">
+                                <div class="diagram-scanline"></div>
+                                <button class="inspect-btn">
+                                    <span class="inspect-icon">🔍</span> INSPECT VTC SCHEMATIC
+                                </button>
+                            </div>
+
+                            <div class="project-content-inner">
+                                <div class="project-badge badge-emerald">GPDK 180nm</div>
+                                <h3 class="project-title">CMOS Inverter Design — GPDK 180nm</h3>
+                                <p class="project-desc">Designed and simulated a CMOS inverter in Cadence Virtuoso (GPDK 180nm) optimizing rise/fall times with detailed DC/AC analysis.</p>
+
+                                <div class="live-anim-widget widget-vtc">
+                                    <div class="widget-title">VTC INVERTER SWITCH SIMULATOR</div>
+                                    <div class="vtc-display">
+                                        <span class="vtc-val vin">Vin = <strong id="vin-val">0.0V (LOW)</strong></span>
+                                        <span class="vtc-arrow">➔</span>
+                                        <span class="vtc-val vout">Vout = <strong id="vout-val">1.2V (HIGH)</strong></span>
+                                    </div>
+                                </div>
+
+                                <div class="project-tags">
+                                    <span class="tag-emerald">Cadence Virtuoso</span><span class="tag-emerald">GPDK 180nm</span><span class="tag-emerald">SPICE</span>
+                                </div>
+                                <div class="project-meta"><span class="meta-date">Jul 2025</span></div>
+                                <a href="https://github.com/Durgesh1029/CMOS-Inverter-Design-and-Analysis-using-GPDK-180nm-Technology-Node" class="project-link link-emerald" target="_blank" rel="noopener">
+                                    <span>VIEW ON GITHUB ➔</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- 5. Project: Sync FIFO -->
+                        <div class="project-card" data-category="vlsi" id="proj-sync-fifo">
+                            <div class="diagram-preview-box" data-diagram="assets/images/sync_fifo.png" data-title="Synchronous FIFO Architecture & Pointer Logic" data-desc="Single clock-domain FIFO buffer block diagram showing Write Pointer, Read Pointer, memory array, and Full/Empty flags.">
+                                <img src="assets/images/sync_fifo.png" alt="Synchronous FIFO Diagram" class="diagram-img">
+                                <div class="diagram-scanline"></div>
+                                <button class="inspect-btn">
+                                    <span class="inspect-icon">🔍</span> INSPECT FIFO BLOCK DIAGRAM
+                                </button>
+                            </div>
+
+                            <div class="project-content-inner">
+                                <div class="project-badge badge-cyan">SYNC FIFO</div>
+                                <h3 class="project-title">Synchronous FIFO — Verilog HDL</h3>
+                                <p class="project-desc">Designed a synchronous FIFO with clock-synchronized read/write pointers, ensuring smooth data flow and preventing underflow/overflow conditions.</p>
+
+                                <div class="live-anim-widget widget-fifo">
+                                    <div class="widget-title">FIFO DATA BUFFER ANIMATION</div>
+                                    <div class="fifo-cells">
+                                        <div class="fifo-cell active-cell">0x4F</div>
+                                        <div class="fifo-cell active-cell">0x89</div>
+                                        <div class="fifo-cell active-cell">0x3A</div>
+                                        <div class="fifo-cell empty-cell">EMPTY</div>
+                                    </div>
+                                    <div class="fifo-status"><span class="badge-status">WrPtr: 0x03</span> | <span class="badge-status">RdPtr: 0x00</span></div>
+                                </div>
+
+                                <div class="project-tags">
+                                    <span class="tag-cyan">Verilog</span><span class="tag-cyan">FIFO</span><span class="tag-cyan">RTL</span>
+                                </div>
+                                <div class="project-meta"><span class="meta-date">Jun 2026</span></div>
+                                <a href="https://github.com/Durgesh1029/Implementation-of-Synchronous-FIFO-using-Verilog-HDL" class="project-link link-cyan" target="_blank" rel="noopener">
+                                    <span>VIEW ON GITHUB ➔</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- 6. Project: Async FIFO -->
+                        <div class="project-card" data-category="vlsi" id="proj-async-fifo">
+                            <div class="diagram-preview-box" data-diagram="assets/images/async_fifo.png" data-title="Dual-Clock Asynchronous FIFO (CDC Gray Code)" data-desc="Dual clock-domain asynchronous FIFO featuring 2-stage Flip-Flop Gray code synchronizers to prevent metastability across clock boundaries.">
+                                <img src="assets/images/async_fifo.png" alt="Asynchronous FIFO Diagram" class="diagram-img">
+                                <div class="diagram-scanline"></div>
+                                <button class="inspect-btn">
+                                    <span class="inspect-icon">🔍</span> INSPECT ASYNC CDC DIAGRAM
+                                </button>
+                            </div>
+
+                            <div class="project-content-inner">
+                                <div class="project-badge badge-purple">CDC & GRAY CODE</div>
+                                <h3 class="project-title">Dual Clock Asynchronous FIFO</h3>
+                                <p class="project-desc">Designed an Asynchronous FIFO using Gray Code pointer synchronization to prevent multi-bit CDC transitions. Developed a two flip-flop synchronizer to mitigate metastability issues.</p>
+
+                                <div class="live-anim-widget widget-cdc">
+                                    <div class="widget-title">CLOCK DOMAIN CROSSING SYNCHRONIZER</div>
+                                    <div class="cdc-domains">
+                                        <div class="domain-box wr-domain">wr_clk (100MHz)</div>
+                                        <div class="sync-ff-pair">2FF Sync</div>
+                                        <div class="domain-box rd-domain">rd_clk (50MHz)</div>
+                                    </div>
+                                </div>
+
+                                <div class="project-tags">
+                                    <span class="tag-purple">Verilog</span><span class="tag-purple">CDC</span><span class="tag-purple">Gray Code</span><span class="tag-purple">Metastability</span>
+                                </div>
+                                <div class="project-meta"><span class="meta-date">Aug 2025</span></div>
+                                <a href="https://github.com/Durgesh1029/-Design-and-implementation-of-Dual-Clock-Asynchronous-FIFO" class="project-link link-purple" target="_blank" rel="noopener">
+                                    <span>VIEW ON GITHUB ➔</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- 7. Project: AHB-APB Bridge -->
+                        <div class="project-card" data-category="vlsi arch" id="proj-ahb-apb">
+                            <div class="diagram-preview-box" data-diagram="assets/images/ahb_apb_bridge.jpg" data-title="AMBA AHB-to-APB Bus Bridge Architecture" data-desc="High-performance AHB Bus Master interfacing with control FSM, address decoder, write buffer, and APB Slaves (UART, GPIO, Timer).">
+                                <img src="assets/images/ahb_apb_bridge.jpg" alt="AHB-APB Bridge Diagram" class="diagram-img">
+                                <div class="diagram-scanline"></div>
+                                <button class="inspect-btn">
+                                    <span class="inspect-icon">🔍</span> INSPECT AMBA BUS DIAGRAM
+                                </button>
+                            </div>
+
+                            <div class="project-content-inner">
+                                <div class="project-badge badge-pink">AMBA BUS</div>
+                                <h3 class="project-title">AHB-APB Bridge Protocol — Verilog</h3>
+                                <p class="project-desc">Developed a bridge between high-speed devices and slower peripherals using AHB Slave Interface to regulate hwrite signal pipelining and an APB Controller employing a robust FSM.</p>
+
+                                <div class="live-anim-widget widget-amba">
+                                    <div class="widget-title">AMBA BUS HANDSHAKE SIGNALS</div>
+                                    <div class="wave-signals">
+                                        <span class="sig-badge">HADDR [31:0]</span> ➔
+                                        <span class="sig-badge active-sig">PSEL</span> ➔
+                                        <span class="sig-badge active-sig">PENABLE</span> ➔
+                                        <span class="sig-badge">PREADY</span>
+                                    </div>
+                                </div>
+
+                                <div class="project-tags">
+                                    <span class="tag-pink">AMBA</span><span class="tag-pink">AHB</span><span class="tag-pink">APB</span><span class="tag-pink">FSM</span><span class="tag-pink">ModelSim</span>
+                                </div>
+                                <div class="project-meta"><span class="meta-date">Aug 2025</span></div>
+                                <a href="https://github.com/Durgesh1029/Designing-the-AHB-APB-bridge-protocol-with-Verilog-for-R-W-transactions" class="project-link link-pink" target="_blank" rel="noopener">
+                                    <span>VIEW ON GITHUB ➔</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- 8. Project: BCD Multiplier -->
+                        <div class="project-card" data-category="vlsi" id="proj-bcd">
+                            <div class="diagram-preview-box" data-diagram="assets/images/bcd_multiplier.jpg" data-title="8-bit BCD Multiplier (Double Dabble Algorithm)" data-desc="Shift-and-Add 3 Double Dabble logic blocks converting binary outputs into BCD digits for 7-segment display decoding.">
+                                <img src="assets/images/bcd_multiplier.jpg" alt="BCD Multiplier Diagram" class="diagram-img">
+                                <div class="diagram-scanline"></div>
+                                <button class="inspect-btn">
+                                    <span class="inspect-icon">🔍</span> INSPECT BCD SCHEMATIC
+                                </button>
+                            </div>
+
+                            <div class="project-content-inner">
+                                <div class="project-badge badge-gold">DOUBLE DABBLE</div>
+                                <h3 class="project-title">8-bit BCD Multiplier — Double Dabble</h3>
+                                <p class="project-desc">Implemented an 8-bit Shift-and-Add multiplier with Double Dabble conversion to display results in both binary and BCD formats.</p>
+
+                                <div class="live-anim-widget widget-bcd">
+                                    <div class="widget-title">SHIFT-ADD 3 (DOUBLE DABBLE) REGISTERS</div>
+                                    <div class="bcd-reg">
+                                        <span class="reg-label">Binary:</span> <code id="bin-bits">1111 1111 (255)</code>
+                                        <span class="reg-label">BCD Output:</span> <code class="gold-code" id="bcd-out">0010 0101 0101</code>
+                                    </div>
+                                </div>
+
+                                <div class="project-tags">
+                                    <span class="tag-gold">Verilog</span><span class="tag-gold">BCD</span><span class="tag-gold">ModelSim</span>
+                                </div>
+                                <div class="project-meta"><span class="meta-date">Aug 2025</span></div>
+                                <a href="https://github.com/Durgesh1029/-Design-and-Verification-of-8-bit-BCD-Multiplier-using-Double-Dabble-Method-using-Verilog-HDL" class="project-link link-gold" target="_blank" rel="noopener">
+                                    <span>VIEW ON GITHUB ➔</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- 9. Project: CLA Adder -->
+                        <div class="project-card" data-category="vlsi" id="proj-cla">
+                            <div class="diagram-preview-box" data-diagram="assets/images/cla_adder.jpg" data-title="Carry Look-Ahead Adder Gate-Level Schematic" data-desc="Generate (G_i = A_i AND B_i) and Propagate (P_i = A_i XOR B_i) logic feeding Carry Lookahead Generator unit to bypass ripple delay.">
+                                <img src="assets/images/cla_adder.jpg" alt="CLA Adder Diagram" class="diagram-img">
+                                <div class="diagram-scanline"></div>
+                                <button class="inspect-btn">
+                                    <span class="inspect-icon">🔍</span> INSPECT CLA SCHEMATIC
+                                </button>
+                            </div>
+
+                            <div class="project-content-inner">
+                                <div class="project-badge badge-cyan">PARALLEL CARRY</div>
+                                <h3 class="project-title">Carry Look-Ahead Adder — Verilog HDL</h3>
+                                <p class="project-desc">Implemented and verified a 4-bit CLA in Verilog using Generate and Propagate logic for high-speed addition, validating sum and carry outputs via comprehensive testbench.</p>
+
+                                <div class="live-anim-widget widget-cla">
+                                    <div class="widget-title">PARALLEL CARRY GENERATOR (C1-C4)</div>
+                                    <div class="cla-signals">
+                                        <span class="cla-chip">P0 = A0⊕B0</span>
+                                        <span class="cla-chip">G0 = A0·B0</span>
+                                        <span class="cla-chip active-carry">C4 = G3 + P3G2 + P3P2G1...</span>
+                                    </div>
+                                </div>
+
+                                <div class="project-tags">
+                                    <span class="tag-cyan">Verilog</span><span class="tag-cyan">CLA</span><span class="tag-cyan">Arithmetic</span>
+                                </div>
+                                <div class="project-meta"><span class="meta-date">Jun 2025</span></div>
+                                <a href="https://github.com/Durgesh1029/Carry-Look-Ahead-Adder-module-Design-and-Verification-using-Verilog-HDL" class="project-link link-cyan" target="_blank" rel="noopener">
+                                    <span>VIEW ON GITHUB ➔</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- 10. Project: L1 Cache -->
+                        <div class="project-card" data-category="arch" id="proj-cache">
+                            <div class="diagram-preview-box" data-diagram="assets/images/l1_cache.jpg" data-title="L1 Cache Controller Architecture & Hit Logic" data-desc="Direct-mapped tag RAM array comparator, Dirty/Valid bit controller, LRU replacement unit, and CPU memory bus interface.">
+                                <img src="assets/images/l1_cache.jpg" alt="L1 Cache Diagram" class="diagram-img">
+                                <div class="diagram-scanline"></div>
+                                <button class="inspect-btn">
+                                    <span class="inspect-icon">🔍</span> INSPECT CACHE ARCHITECTURE
+                                </button>
+                            </div>
+
+                            <div class="project-content-inner">
+                                <div class="project-badge badge-purple">MEMORY HIERARCHY</div>
+                                <h3 class="project-title">Level-1 Cache Module — Verilog</h3>
+                                <p class="project-desc">Implemented a direct-mapped L1 cache with tag store, data store, and valid bits with hit/miss detection logic. Designed an FSM for load/write operations.</p>
+
+                                <div class="live-anim-widget widget-cache">
+                                    <div class="widget-title">CACHE TAG COMPARATOR SIMULATOR</div>
+                                    <div class="cache-status">
+                                        <span class="tag-match">Tag: 0x3A5F</span> ➔
+                                        <span class="hit-badge pulse-green">CACHE HIT!</span>
+                                    </div>
+                                </div>
+
+                                <div class="project-tags">
+                                    <span class="tag-purple">Verilog</span><span class="tag-purple">Cache</span><span class="tag-purple">FSM</span><span class="tag-purple">Memory</span>
+                                </div>
+                                <div class="project-meta"><span class="meta-date">May 2025</span></div>
+                                <a href="https://github.com/Durgesh1029/Design-of-a-Level-1-Cache-Module" class="project-link link-purple" target="_blank" rel="noopener">
+                                    <span>VIEW ON GITHUB ➔</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- 11. Project: SAT-based ATPG -->
+                        <div class="project-card" data-category="vlsi" id="proj-sat">
+                            <div class="diagram-preview-box" data-diagram="assets/images/sat_atpg.jpg" data-title="SAT-Based ATPG Fault Testing (74181 ALU)" data-desc="CNF boolean formulation of circuit netlists and stuck-at fault models, driving MiniSat/z3 solver engines to generate fault detection test vectors.">
+                                <img src="assets/images/sat_atpg.jpg" alt="SAT ATPG Diagram" class="diagram-img">
+                                <div class="diagram-scanline"></div>
+                                <button class="inspect-btn">
+                                    <span class="inspect-icon">🔍</span> INSPECT ATPG SCHEMATIC
+                                </button>
+                            </div>
+
+                            <div class="project-content-inner">
+                                <div class="project-badge badge-emerald">DFT & ATPG</div>
+                                <h3 class="project-title">SAT-based Fault Testing — 74181 ALU</h3>
+                                <p class="project-desc">Formulated CNFs for good and faulty circuits; modeled stuck-at faults using SAT solvers. Applied SAT-based ATPG to 74181 ALU, generating test vectors for single and multiple stuck-at faults.</p>
+
+                                <div class="live-anim-widget widget-sat">
+                                    <div class="widget-title">SAT SOLVER TEST VECTOR GENERATOR</div>
+                                    <div class="sat-box">
+                                        <span class="fault-name">Fault: G3 s-a-0</span> ➔
+                                        <span class="vector-val">Test Vector: [0010 1011 0110]</span>
+                                    </div>
+                                </div>
+
+                                <div class="project-tags">
+                                    <span class="tag-emerald">DFT</span><span class="tag-emerald">ATPG</span><span class="tag-emerald">SAT Solver</span><span class="tag-emerald">CNF</span>
+                                </div>
+                                <div class="project-meta"><span class="meta-date">May 2025</span></div>
+                                <a href="https://github.com/Durgesh1029/SAT-based-Fault-Testing-on-Digital-Circuits-and-74181-ALU" class="project-link link-emerald" target="_blank" rel="noopener">
+                                    <span>VIEW ON GITHUB ➔</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- 12. Project: 3-bit Counter -->
+                        <div class="project-card" data-category="vlsi" id="proj-counter">
+                            <div class="diagram-preview-box" data-diagram="assets/images/up_down_counter.jpg" data-title="3-Bit Synchronous Up-Down Counter Schematic" data-desc="3 JK Flip-Flops connected with synchronous clock line, Up/Down steering gates, 8-state machine transition diagram, and timing waveforms.">
+                                <img src="assets/images/up_down_counter.jpg" alt="Up Down Counter Diagram" class="diagram-img">
+                                <div class="diagram-scanline"></div>
+                                <button class="inspect-btn">
+                                    <span class="inspect-icon">🔍</span> INSPECT COUNTER STATE MACHINE
+                                </button>
+                            </div>
+
+                            <div class="project-content-inner">
+                                <div class="project-badge badge-cyan">JK FLIP-FLOPS</div>
+                                <h3 class="project-title">Synchronous 3-bit Up-Down Counter</h3>
+                                <p class="project-desc">Designed and implemented a 3-bit synchronous up-down counter using JK flip-flops in Verilog HDL, deriving excitation logic via state tables and Karnaugh maps.</p>
+
+                                <div class="live-anim-widget widget-counter">
+                                    <div class="widget-title">LIVE 3-BIT BINARY COUNTER TICKER</div>
+                                    <div class="counter-display">
+                                        <span class="counter-bit bit-on" id="c-bit2">1</span>
+                                        <span class="counter-bit bit-on" id="c-bit1">0</span>
+                                        <span class="counter-bit bit-on" id="c-bit0">1</span>
+                                        <span class="counter-decimal">(Val: <strong id="c-dec">5</strong>)</span>
+                                    </div>
+                                </div>
+
+                                <div class="project-tags">
+                                    <span class="tag-cyan">Verilog</span><span class="tag-cyan">Vivado</span><span class="tag-cyan">JK FF</span>
+                                </div>
+                                <div class="project-meta"><span class="meta-date">Jan 2026</span></div>
+                                <a href="https://github.com/Durgesh1029/Designed-a-Synchronous-3-bit-Up-Down-Counter" class="project-link link-cyan" target="_blank" rel="noopener">
+                                    <span>VIEW ON GITHUB ➔</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- 13. Project: Deepfake Detection -->
+                        <div class="project-card" data-category="ai" id="proj-deepfake">
+                            <div class="diagram-preview-box" data-diagram="assets/images/deepfake_detection.jpg" data-title="ISVT Spatial-Temporal Vision Transformer Architecture" data-desc="Video frame inputs processed through CNN/ViT spatial backbones and multi-head temporal self-attention transformer layers for deepfake verification.">
+                                <img src="assets/images/deepfake_detection.jpg" alt="Deepfake Detection Diagram" class="diagram-img">
+                                <div class="diagram-scanline"></div>
+                                <button class="inspect-btn">
+                                    <span class="inspect-icon">🔍</span> INSPECT TRANSFORMER MODEL
+                                </button>
+                            </div>
+
+                            <div class="project-content-inner">
+                                <div class="project-badge badge-magenta">VISION TRANSFORMER</div>
+                                <h3 class="project-title">ISVT for Deepfake Detection</h3>
+                                <p class="project-desc">Developed an Interpretable Spatial-Temporal Video Transformer combining CNN feature extraction and transformer blocks for video deepfake detection.</p>
+
+                                <div class="live-anim-widget widget-transformer">
+                                    <div class="widget-title">SPATIO-TEMPORAL ATTENTION MAP</div>
+                                    <div class="attn-heatmap">
+                                        <span class="attn-cell high">Frame 1</span>
+                                        <span class="attn-cell mid">Frame 2</span>
+                                        <span class="attn-cell high">Frame 3</span>
+                                        <span class="attn-cell fake-alert">FAKE DETECTED (98%)</span>
+                                    </div>
+                                </div>
+
+                                <div class="project-tags">
+                                    <span class="tag-magenta">CNN</span><span class="tag-magenta">Transformer</span><span class="tag-magenta">Computer Vision</span><span class="tag-magenta">PyTorch</span>
+                                </div>
+                                <div class="project-meta"><span class="meta-date">Course Project</span></div>
+                                <a href="https://github.com/Durgesh1029" class="project-link link-magenta" target="_blank" rel="noopener">
+                                    <span>VIEW ON GITHUB ➔</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- 14. Project: Sentiment Analysis -->
+                        <div class="project-card" data-category="ai" id="proj-sentiment">
+                            <div class="diagram-preview-box" data-diagram="assets/images/roberta_sentiment.jpg" data-title="RoBERTa NLP Sentiment Analysis Pipeline" data-desc="BPE subword tokenization, multi-layer RoBERTa transformer encoder, fine-tuning classification head outputting sentiment probabilities.">
+                                <img src="assets/images/roberta_sentiment.jpg" alt="RoBERTa Sentiment Analysis Diagram" class="diagram-img">
+                                <div class="diagram-scanline"></div>
+                                <button class="inspect-btn">
+                                    <span class="inspect-icon">🔍</span> INSPECT NLP PIPELINE
+                                </button>
+                            </div>
+
+                            <div class="project-content-inner">
+                                <div class="project-badge badge-purple">NLP & ROBERTA</div>
+                                <h3 class="project-title">Twitter Sentiment Analysis — Russia-Ukraine Conflict</h3>
+                                <p class="project-desc">Executed a sentiment analysis pipeline utilizing RoBERTa and machine learning classification on large-scale multilingual tweet datasets.</p>
+
+                                <div class="live-anim-widget widget-nlp">
+                                    <div class="widget-title">ROBERTA CLASSIFICATION PROBABILITIES</div>
+                                    <div class="nlp-bars">
+                                        <div class="nlp-item"><span class="nlp-label">Positive:</span><div class="nlp-track"><div class="nlp-fill pos" style="width: 72%">72%</div></div></div>
+                                        <div class="nlp-item"><span class="nlp-label">Neutral:</span><div class="nlp-track"><div class="nlp-fill neu" style="width: 18%">18%</div></div></div>
+                                        <div class="nlp-item"><span class="nlp-label">Negative:</span><div class="nlp-track"><div class="nlp-fill neg" style="width: 10%">10%</div></div></div>
+                                    </div>
+                                </div>
+
+                                <div class="project-tags">
+                                    <span class="tag-purple">NLP</span><span class="tag-purple">RoBERTa</span><span class="tag-purple">Scikit-learn</span><span class="tag-purple">Python</span>
+                                </div>
+                                <div class="project-meta"><span class="meta-date">Course Project</span></div>
+                                <a href="https://github.com/Durgesh1029" class="project-link link-purple" target="_blank" rel="noopener">
+                                    <span>VIEW ON GITHUB ➔</span>
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <!-- PAGE 5: EXPERIENCE SECTION -->
+            <section id="experience" class="section book-page page-5" data-page="5" data-title="MISSION LOG">
+                <div class="page-corner-fold"></div>
+                <div class="page-content-wrapper">
+                    <div class="section-header text-center">
+                        <span class="section-tag">// PAGE 05</span>
+                        <h2 class="section-title title-gradient-1">MISSION LOG</h2>
+                        <div class="section-line line-gradient-1"></div>
+                    </div>
+                    <div class="timeline">
+                        <div class="timeline-item glowing-border-cyan" id="exp-sm">
+                            <div class="timeline-content">
+                                <span class="timeline-date date-cyan">Aug 2025 — Present</span>
+                                <h3>Social Media Manager</h3>
+                                <p>Electrical Engineering Association, EE Department, IIT Kanpur</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item glowing-border-purple" id="exp-ta">
+                            <div class="timeline-content">
+                                <span class="timeline-date date-purple">Jul 2025 — Dec 2025</span>
+                                <h3>Overall Management Teaching Assistant</h3>
+                                <p>Introduction To Electronics Lab (ESC201), IIT Kanpur</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item glowing-border-pink" id="exp-ta-cv">
+                            <div class="timeline-content">
+                                <span class="timeline-date date-pink">M.Tech Period</span>
+                                <h3>Teaching Assistant — CV & Deep Learning</h3>
+                                <p>Computer Vision and Deep Learning (EE655), IIT Kanpur</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PAGE 6: CERTIFICATIONS SECTION -->
+            <section id="certifications" class="section book-page page-6" data-page="6" data-title="CERTIFICATION MATRIX">
+                <div class="page-corner-fold"></div>
+                <div class="page-content-wrapper">
+                    <div class="section-header text-center">
+                        <span class="section-tag">// PAGE 06</span>
+                        <h2 class="section-title title-gradient-2">CERTIFICATION MATRIX</h2>
+                        <div class="section-line line-gradient-2"></div>
+                    </div>
+                    <div class="certs-grid">
+                        <div class="cert-card cert-gold" id="cert-workshop">
+                            <div class="cert-icon">🏛️</div>
+                            <h4>VLSI Testing & DFT Workshop</h4>
+                            <p>Prof. Adit D. Singh (Auburn University) at IIT Kanpur</p>
+                            <span class="cert-badge badge-gold">Offline Workshop — Jul 2026</span>
+                        </div>
+                        <div class="cert-card cert-cyan" id="cert-nptel1">
+                            <div class="cert-icon">📜</div>
+                            <h4>CMOS Digital VLSI Design</h4>
+                            <p>NPTEL — Elite Certificate</p>
+                            <span class="cert-badge badge-cyan">NPTEL Elite</span>
+                        </div>
+                        <div class="cert-card cert-cyan" id="cert-nptel2">
+                            <div class="cert-icon">📜</div>
+                            <h4>Digital Design with Verilog</h4>
+                            <p>NPTEL — Elite Certificate</p>
+                            <span class="cert-badge badge-cyan">NPTEL Elite</span>
+                        </div>
+                        <div class="cert-card cert-purple" id="cert-pd">
+                            <div class="cert-icon">🎯</div>
+                            <h4>VSD — Physical Design Flow</h4>
+                            <p>Udemy Course</p>
+                            <span class="cert-badge badge-purple">Udemy</span>
+                        </div>
+                        <div class="cert-card cert-purple" id="cert-sta">
+                            <div class="cert-icon">⏱️</div>
+                            <h4>VSD — Static Timing Analysis I & II</h4>
+                            <p>Udemy Course</p>
+                            <span class="cert-badge badge-purple">Udemy</span>
+                        </div>
+                        <div class="cert-card cert-pink" id="cert-upf">
+                            <div class="cert-icon">⚡</div>
+                            <h4>UPF Power Aware Design & Verification</h4>
+                            <p>Udemy Course</p>
+                            <span class="cert-badge badge-pink">Udemy</span>
+                        </div>
+                        <div class="cert-card cert-purple" id="cert-sv">
+                            <div class="cert-icon">🔧</div>
+                            <h4>SystemVerilog HDL + Introduction to UVM</h4>
+                            <p>Udemy Course</p>
+                            <span class="cert-badge badge-purple">Udemy</span>
+                        </div>
+                        <div class="cert-card cert-gold" id="cert-asic">
+                            <div class="cert-icon">💎</div>
+                            <h4>Complete ASIC Design Flow: Idea to Silicon</h4>
+                            <p>Udemy Course</p>
+                            <span class="cert-badge badge-gold">Udemy</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PAGE 7: CONTACT SECTION -->
+            <section id="contact" class="section book-page page-7" data-page="7" data-title="CONTACT LOG">
+                <div class="page-corner-fold"></div>
+                <div class="page-content-wrapper">
+                    <div class="section-header text-center">
+                        <span class="section-tag">// PAGE 07</span>
+                        <h2 class="section-title title-gradient-1">GET IN TOUCH</h2>
+                        <div class="section-line line-gradient-1"></div>
+                    </div>
+                    <div class="contact-grid">
+                        <a href="mailto:durgesh24@iitk.ac.in" class="contact-card card-cyan" id="contact-email1">
+                            <div class="contact-icon">✉️</div>
+                            <h4>IIT Kanpur Email</h4>
+                            <p>durgesh24@iitk.ac.in</p>
+                        </a>
+                        <a href="mailto:durgeshdon121@gmail.com" class="contact-card card-purple" id="contact-email2">
+                            <div class="contact-icon">📧</div>
+                            <h4>Personal Email</h4>
+                            <p>durgeshdon121@gmail.com</p>
+                        </a>
+                        <a href="https://github.com/Durgesh1029" target="_blank" rel="noopener" class="contact-card card-pink" id="contact-github">
+                            <div class="contact-icon">💻</div>
+                            <h4>GitHub</h4>
+                            <p>Durgesh1029</p>
+                        </a>
+                        <a href="https://www.linkedin.com/in/durgesh-dongre/" target="_blank" rel="noopener" class="contact-card card-gold" id="contact-linkedin">
+                            <div class="contact-icon">🔗</div>
+                            <h4>LinkedIn</h4>
+                            <p>durgesh-dongre</p>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- ===== FLOATING BOOK PAGE NAVIGATION CONTROLS ===== -->
+    <div class="book-controls" id="book-controls">
+        <button class="page-nav-btn" id="prev-page-btn" aria-label="Previous Page">◄ PREV PAGE</button>
+        <div class="page-indicator">
+            <span class="page-label">LOGBOOK PAGE</span>
+            <span class="page-number" id="page-num-display">1 / 8</span>
+            <span class="page-title-tag" id="page-title-display">HOME LOG</span>
+        </div>
+        <button class="page-nav-btn" id="next-page-btn" aria-label="Next Page">NEXT PAGE ►</button>
+    </div>
+
+    <!-- ===== HIGH-TECH DIAGRAM LIGHTBOX MODAL ===== -->
+    <div class="diagram-modal" id="diagram-modal" aria-hidden="true">
+        <div class="modal-backdrop" id="modal-backdrop"></div>
+        <div class="modal-window">
+            <div class="modal-header">
+                <div class="modal-title-wrap">
+                    <span class="modal-icon">📐</span>
+                    <h3 class="modal-title" id="modal-title">Architecture Schematic</h3>
+                </div>
+                <button class="modal-close" id="modal-close" aria-label="Close modal">✕</button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-img-container">
+                    <img src="" id="modal-img" alt="Diagram Detail">
+                </div>
+                <div class="modal-description-box">
+                    <p id="modal-desc">Schematic description details will appear here.</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <span class="modal-tech-tag">VLSI / ARCHITECTURE HARDWARE MODEL</span>
+                <button class="cta-btn secondary-btn btn-glass" id="modal-close-btn">CLOSE SCHEMATIC</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p class="footer-text">
+                <span class="footer-bracket">[</span>
+                DESIGNED & BUILT BY DURGESH DONGRE — <span id="current-year"></span>
+                <span class="footer-bracket">]</span>
+            </p>
+            <p class="footer-sub">IIT KANPUR • ELECTRICAL ENGINEERING</p>
+        </div>
+    </footer>
+
+    <script>
+/* ===================================================================
+   DURGESH DONGRE — Hardware & Electrical Engineering Portfolio
+   3D Book Page Turn Engine & Moving Digital Circuit Signals Background
+   =================================================================== */
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Current Year
+    const yearEl = document.getElementById('current-year');
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+    /* ===================================================================
+       1. MOVING DIGITAL SIGNALS & CIRCUITS BACKGROUND CANVAS
+       =================================================================== */
+    const canvas = document.getElementById('particles-canvas');
+    if (canvas) {
+        const ctx = canvas.getContext('2d');
+        let width = (canvas.width = window.innerWidth);
+        let height = (canvas.height = window.innerHeight);
+
+        const numSignals = 14;
+        const signals = [];
+        const bits = [];
+        const numBits = 28;
+
+        const gateSymbols = ['D-FF', 'CLK', 'AND', 'OR', 'XOR', 'Q', "Q'", 'VCC', 'GND', '1', '0'];
+        const brightColors = ['#0284c7', '#7c3aed', '#db2777', '#059669', '#d97706'];
+
+        // Signal Bus Wire Tracks
+        class DigitalSignalWire {
+            constructor(yPos) {
+                this.y = yPos;
+                this.speed = Math.random() * 1.5 + 0.8;
+                this.x = Math.random() * width;
+                this.color = brightColors[Math.floor(Math.random() * brightColors.length)];
+            }
+            update() {
+                this.x += this.speed;
+                if (this.x > width + 250) {
+                    this.x = -250;
+                    this.y = Math.random() * height;
+                }
+            }
+            draw() {
+                ctx.beginPath();
+                ctx.strokeStyle = this.color;
+                ctx.lineWidth = 2.2;
+                ctx.globalAlpha = 0.4;
+
+                let startX = this.x;
+                const highY = this.y - 12;
+                const lowY = this.y + 12;
+
+                ctx.moveTo(startX, lowY);
+                for (let i = 0; i < 7; i++) {
+                    ctx.lineTo(startX + 15, lowY);
+                    ctx.lineTo(startX + 15, highY);
+                    ctx.lineTo(startX + 35, highY);
+                    ctx.lineTo(startX + 35, lowY);
+                    startX += 35;
+                }
+                ctx.shadowBlur = 10;
+                ctx.shadowColor = this.color;
+                ctx.stroke();
+                ctx.globalAlpha = 1.0;
+            }
+        }
+
+        // Logic Bits (0 and 1) & Gate Symbols Moving along Circuit Lines
+        class MovingBit {
+            constructor() {
+                this.reset();
+            }
+            reset() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.vx = (Math.random() - 0.5) * 1.4;
+                this.vy = (Math.random() - 0.5) * 1.4;
+                this.val = Math.random() > 0.5 ? '1' : '0';
+                this.symbol = Math.random() > 0.7 ? gateSymbols[Math.floor(Math.random() * gateSymbols.length)] : this.val;
+                this.color = brightColors[Math.floor(Math.random() * brightColors.length)];
+                this.alpha = Math.random() * 0.4 + 0.35;
+                this.size = this.symbol.length > 1 ? 12 : 15;
+            }
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+                if (this.x < 0 || this.x > width || this.y < 0 || this.y > height) {
+                    this.reset();
+                }
+            }
+            draw() {
+                ctx.font = `700 ${this.size}px "JetBrains Mono", monospace`;
+                ctx.fillStyle = this.color;
+                ctx.globalAlpha = this.alpha;
+                ctx.shadowBlur = 8;
+                ctx.shadowColor = this.color;
+                ctx.fillText(this.symbol, this.x, this.y);
+                ctx.globalAlpha = 1.0;
+            }
+        }
+
+        for (let i = 0; i < numSignals; i++) {
+            signals.push(new DigitalSignalWire((i + 1) * (height / (numSignals + 1))));
+        }
+        for (let i = 0; i < numBits; i++) {
+            bits.push(new MovingBit());
+        }
+
+        function animateCanvas() {
+            ctx.clearRect(0, 0, width, height);
+
+            signals.forEach(sig => {
+                sig.update();
+                sig.draw();
+            });
+
+            bits.forEach(b => {
+                b.update();
+                b.draw();
+            });
+
+            requestAnimationFrame(animateCanvas);
+        }
+
+        animateCanvas();
+
+        window.addEventListener('resize', () => {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        });
+    }
+
+    /* ===================================================================
+       2. 3D BOOK PAGE TURN ENGINE
+       =================================================================== */
+    let currentPage = 1;
+    const totalPages = 7;
+    let isFlipping = false;
+
+    const pages = document.querySelectorAll('.book-page');
+    const pageNumDisplay = document.getElementById('page-num-display');
+    const pageTitleDisplay = document.getElementById('page-title-display');
+    const prevBtn = document.getElementById('prev-page-btn');
+    const nextBtn = document.getElementById('next-page-btn');
+    const navLinks = document.querySelectorAll('.nav-link, .mobile-link');
+
+    const pageTitles = {
+        1: 'HOME LOG',
+        2: 'SYSTEM PROFILE',
+        3: 'TECHNICAL ARSENAL',
+        4: 'PROJECT ARCHIVE',
+        5: 'MISSION LOG',
+        6: 'CERTIFICATIONS',
+        7: 'CONTACT LOG'
+    };
+
+    function turnToPage(targetPage) {
+        if (targetPage === currentPage || targetPage < 1 || targetPage > totalPages || isFlipping) return;
+
+        isFlipping = true;
+        const currentPageEl = document.querySelector(`.book-page.page-${currentPage}`);
+        const targetPageEl = document.querySelector(`.book-page.page-${targetPage}`);
+
+        if (!currentPageEl || !targetPageEl) return;
+
+        const isNext = targetPage > currentPage;
+
+        if (isNext) {
+            currentPageEl.classList.add('page-turn-out-left');
+            targetPageEl.classList.add('page-turn-in-right', 'active-page');
+        } else {
+            currentPageEl.classList.add('page-turn-out-right');
+            targetPageEl.classList.add('page-turn-in-left', 'active-page');
+        }
+
+        if (pageNumDisplay) pageNumDisplay.textContent = `${targetPage} / ${totalPages}`;
+        if (pageTitleDisplay) pageTitleDisplay.textContent = pageTitles[targetPage] || '';
+
+        navLinks.forEach(link => {
+            const linkPage = parseInt(link.getAttribute('data-page'), 10);
+            if (linkPage === targetPage) {
+                link.classList.add('active');
+            } else {
+                link.classList.remove('active');
+            }
+        });
+
+        setTimeout(() => {
+            pages.forEach(p => {
+                p.classList.remove('active-page', 'page-turn-out-left', 'page-turn-in-right', 'page-turn-out-right', 'page-turn-in-left');
+            });
+            targetPageEl.classList.add('active-page');
+            currentPage = targetPage;
+            isFlipping = false;
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }, 600);
+    }
+
+    if (prevBtn) prevBtn.addEventListener('click', () => turnToPage(currentPage - 1));
+    if (nextBtn) nextBtn.addEventListener('click', () => turnToPage(currentPage + 1));
+
+    navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const pageNum = parseInt(link.getAttribute('data-page'), 10);
+            if (pageNum) turnToPage(pageNum);
+        });
+    });
+
+    const heroTurnBtn = document.getElementById('hero-turn-page-btn');
+    if (heroTurnBtn) {
+        heroTurnBtn.addEventListener('click', () => turnToPage(4));
+    }
+
+    document.addEventListener('keydown', (e) => {
+        if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'SELECT') return;
+        if (e.key === 'ArrowRight' || e.key === 'PageDown') {
+            turnToPage(currentPage + 1);
+        } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+            turnToPage(currentPage - 1);
+        }
+    });
+
+    /* Mouse Wheel / Touchpad Scroll 3D Page Turning Engine */
+    let wheelCooldown = false;
+    window.addEventListener('wheel', (e) => {
+        const diagramModal = document.getElementById('diagram-modal');
+        if (diagramModal && diagramModal.classList.contains('open')) return;
+        if (e.target.closest('input, textarea, select')) return;
+        if (wheelCooldown || isFlipping) return;
+
+        if (e.deltaY > 20) {
+            // Scroll down -> turn to next page
+            if (currentPage < totalPages) {
+                wheelCooldown = true;
+                turnToPage(currentPage + 1);
+                setTimeout(() => { wheelCooldown = false; }, 750);
+            }
+        } else if (e.deltaY < -20) {
+            // Scroll up -> turn to previous page
+            if (currentPage > 1) {
+                wheelCooldown = true;
+                turnToPage(currentPage - 1);
+                setTimeout(() => { wheelCooldown = false; }, 750);
+            }
+        }
+    }, { passive: true });
+
+    /* Stat Counters Initialization (14+ Projects, 20+ EDA Tools, 8+ Certifications) */
+    function initStatCounters() {
+        const statElements = document.querySelectorAll('.stat-number');
+        statElements.forEach(el => {
+            const countTarget = parseInt(el.getAttribute('data-count'), 10);
+            if (!countTarget) return;
+
+            let currentVal = 0;
+            const step = Math.max(1, Math.ceil(countTarget / 20));
+            const interval = setInterval(() => {
+                currentVal += step;
+                if (currentVal >= countTarget) {
+                    currentVal = countTarget;
+                    clearInterval(interval);
+                }
+                el.textContent = `${currentVal}+`;
+            }, 45);
+        });
+    }
+    initStatCounters();
+
+    /* ===================================================================
+       3. TYPEWRITER EFFECT IN HERO
+       =================================================================== */
+    const heroSubtitle = document.getElementById('hero-subtitle');
+    if (heroSubtitle) {
+        const phrases = [
+            'ELECTRICAL ENGINEERING @ IIT KANPUR',
+            'VLSI DESIGN & ASIC FLOW (RTL ➔ GDSII)',
+            'COMPUTER ARCHITECTURE & SYSTEMVERILOG',
+            'AI / ML & FEDERATED CONTINUAL LEARNING'
+        ];
+        let phraseIdx = 0;
+        let charIdx = 0;
+        let isDeleting = false;
+
+        function typeLoop() {
+            const currentPhrase = phrases[phraseIdx];
+            if (isDeleting) {
+                heroSubtitle.textContent = currentPhrase.substring(0, charIdx - 1);
+                charIdx--;
+            } else {
+                heroSubtitle.textContent = currentPhrase.substring(0, charIdx + 1);
+                charIdx++;
+            }
+
+            let typeSpeed = isDeleting ? 35 : 75;
+
+            if (!isDeleting && charIdx === currentPhrase.length) {
+                typeSpeed = 2200;
+                isDeleting = true;
+            } else if (isDeleting && charIdx === 0) {
+                isDeleting = false;
+                phraseIdx = (phraseIdx + 1) % phrases.length;
+                typeSpeed = 400;
+            }
+
+            setTimeout(typeLoop, typeSpeed);
+        }
+        typeLoop();
+    }
+
+    /* ===================================================================
+       4. INTERACTIVE DIAGRAM LIGHTBOX MODAL
+       =================================================================== */
+    const diagramModal = document.getElementById('diagram-modal');
+    const modalImg = document.getElementById('modal-img');
+    const modalTitle = document.getElementById('modal-title');
+    const modalDesc = document.getElementById('modal-desc');
+    const modalClose = document.getElementById('modal-close');
+    const modalCloseBtn = document.getElementById('modal-close-btn');
+    const modalBackdrop = document.getElementById('modal-backdrop');
+
+    function openModal(imgSrc, titleText, descText) {
+        if (!diagramModal) return;
+        modalImg.src = imgSrc;
+        modalTitle.textContent = titleText || 'Architecture Schematic';
+        modalDesc.textContent = descText || 'Detailed hardware implementation schematic and timing layout.';
+        diagramModal.classList.add('open');
+        diagramModal.setAttribute('aria-hidden', 'false');
+    }
+
+    function closeModal() {
+        if (!diagramModal) return;
+        diagramModal.classList.remove('open');
+        diagramModal.setAttribute('aria-hidden', 'true');
+    }
+
+    document.querySelectorAll('.diagram-preview-box').forEach(box => {
+        box.addEventListener('click', () => {
+            const imgSrc = box.getAttribute('data-diagram');
+            const titleText = box.getAttribute('data-title');
+            const descText = box.getAttribute('data-desc');
+            if (imgSrc) openModal(imgSrc, titleText, descText);
+        });
+    });
+
+    if (modalClose) modalClose.addEventListener('click', closeModal);
+    if (modalCloseBtn) modalCloseBtn.addEventListener('click', closeModal);
+    if (modalBackdrop) modalBackdrop.addEventListener('click', closeModal);
+
+    /* ===================================================================
+       5. PROJECT FILTER SYSTEM
+       =================================================================== */
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const projectCards = document.querySelectorAll('.project-card');
+
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            filterBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            const filter = btn.getAttribute('data-filter');
+
+            projectCards.forEach(card => {
+                const categories = card.getAttribute('data-category');
+                if (filter === 'all' || categories.includes(filter)) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    });
+
+    /* ===================================================================
+       6. LIVE INTERACTIVE WIDGET SIMULATORS
+       =================================================================== */
+    let counterVal = 5;
+    const bit2 = document.getElementById('c-bit2');
+    const bit1 = document.getElementById('c-bit1');
+    const bit0 = document.getElementById('c-bit0');
+    const decVal = document.getElementById('c-dec');
+
+    if (bit2 && bit1 && bit0 && decVal) {
+        setInterval(() => {
+            counterVal = (counterVal + 1) % 8;
+            bit2.textContent = (counterVal >> 2) & 1;
+            bit1.textContent = (counterVal >> 1) & 1;
+            bit0.textContent = counterVal & 1;
+            decVal.textContent = counterVal;
+        }, 1500);
+    }
+
+    const vinVal = document.getElementById('vin-val');
+    const voutVal = document.getElementById('vout-val');
+    let vtcState = true;
+
+    if (vinVal && voutVal) {
+        setInterval(() => {
+            vtcState = !vtcState;
+            vinVal.textContent = vtcState ? '0.0V (LOW)' : '1.2V (HIGH)';
+            voutVal.textContent = vtcState ? '1.2V (HIGH)' : '0.0V (LOW)';
+        }, 2500);
+    }
+
+
+
+    /* ===================================================================
+       8. MOBILE NAV TOGGLE
+       =================================================================== */
+    const navHamburger = document.getElementById('nav-hamburger');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    if (navHamburger && mobileMenu) {
+        navHamburger.addEventListener('click', () => {
+            mobileMenu.classList.toggle('open');
+        });
+
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('open');
+            });
+        });
+    }
+});
+
+</script>
+</body>
+</html>
